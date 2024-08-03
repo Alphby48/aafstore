@@ -1,0 +1,29 @@
+.row-image {
+  width: 100%;
+  .cares-box {
+    .carousel-inner {
+      .carousel-item {
+        .image-car {
+          height: 400px;
+          margin-top: 3.4rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .row-image {
+    .cares-box {
+      .carousel-inner {
+        .carousel-item {
+          width: 100%;
+          .image-car {
+            height: 200px;
+            margin-top: 3.4rem;
+          }
+        }
+      }
+    }
+  }
+}
