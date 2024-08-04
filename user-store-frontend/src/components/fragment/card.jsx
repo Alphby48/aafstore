@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+
 const CardElement = (props) => {
   const { image, title, price, _id } = props;
+
   return (
     <div className="card" key={_id}>
       <div className="card-image">
@@ -18,9 +20,6 @@ const CardElement = (props) => {
           <Link to={`/product/detail/${_id}`} className="btn btn-primary">
             Detail
           </Link>
-          <a href="#" className="btn btn-warning">
-            <i className="bi bi-cart-plus"></i>
-          </a>
         </div>
       </div>
     </div>

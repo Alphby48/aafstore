@@ -5,6 +5,8 @@ import Carousel from "../components/fragment/carousel";
 import CardElement from "../components/fragment/card";
 import { GetProducts } from "../service/products";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -16,7 +18,6 @@ const ProductPage = () => {
       setProducts(res);
     });
   }, []);
-  console.log(products);
 
   const logOutHandle = () => {
     localStorage.removeItem("token");

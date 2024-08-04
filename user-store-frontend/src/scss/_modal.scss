@@ -1,0 +1,24 @@
+.modal-dialog {
+  background-color: transparent;
+  .modal-content {
+    background-color: transparent;
+    .modal-header {
+      background-color: #ffffffe5;
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #221f1fe5;
+      i {
+        font-size: 8rem;
+        color: #00e759;
+      }
+      p {
+        font-size: 1.3rem;
+        color: #ffffff;
+      }
+    }
+  }
+}

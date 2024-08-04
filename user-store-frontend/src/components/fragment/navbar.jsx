@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlices";
+import { useEffect } from "react";
+import { useState } from "react";
 const NavbarPage = (props) => {
+  const [total, setTotal] = useState(0);
   const { onClick } = props;
+  const cart = useSelector((state) => state.cart.data);
+  useEffect(() => {
+    const sum = cart.reduce((a, b) => a + b.qty, 0);
+    setTotal(sum);
+  }, [cart]);
   return (
     <div className="navigator fixed-top">
       <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -43,7 +53,7 @@ const NavbarPage = (props) => {
           <i className="bi bi-cart-plus"></i>
         </Link>
         <div className="box-price">
-          <p>0</p>
+          <p>{total}</p>
         </div>
         <Link onClick={onClick} className="link-profile">
           <i className="bi bi-person-circle"></i>
