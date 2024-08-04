@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 // const productsSchema = require("../model/products");
 mongoose.connect(
-  "mongodb+srv://denzuko743:elingBali573cV@cluster0.tcn8pic.mongodb.net/aafstore?retryWrites=true&w=majority&appName=Cluster0"
+  "(MASUKAN DATA BASE ANDA)"
 );
 
 // const product = new productsSchema({
