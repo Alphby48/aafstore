@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 // const productsSchema = require("../model/products");
 mongoose.connect(
-  "mongodb+srv://denzuko743:kr1c4B4k4r@cluster0.tcn8pic.mongodb.net/aafstore?retryWrites=true&w=majority&appName=Cluster0"
+  "gak usah liat database gw, gak usah liat database gw, gak usah liat database gw, gak usah liat database gw"
 );
 
 // const product = new productsSchema({
