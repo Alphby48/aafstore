@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 // const productsSchema = require("../model/products");
-mongoose.connect(
-  "mongodb+srv://denzuko743:kr1c4B4k4r@cluster0.tcn8pic.mongodb.net/aafstore?retryWrites=true&w=majority&appName=Cluster0"
-);
+mongoose.connect("(MASUKAN DATA BASE ANDA GUYS)");
 
 // const product = new productsSchema({
 //   title: "Panci Stainless Zebra Sauce Pan 20 Cm",
