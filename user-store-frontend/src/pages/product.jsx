@@ -24,6 +24,12 @@ const ProductPage = () => {
     window.location.href = "/login";
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    window.location.href = `/search/${e.target.search.value}`;
+    e.target.search.value = "";
+  };
+
   return (
     <div className="container-box">
       <NavbarPage onClick={logOutHandle}></NavbarPage>
@@ -32,11 +38,23 @@ const ProductPage = () => {
         <SidebarProduct />
         <div className="product-box">
           <h1>All Product</h1>
+          <form className="search" onSubmit={handleSearch}>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search..."
+            />
+            <button type="submit">
+              <i className="bi bi-search"></i>
+            </button>
+          </form>
           <div className="all-product">
             {products.length > 0 &&
               products.map((p) => {
                 return (
                   <CardElement
+                    key={p._id}
                     _id={p._id}
                     image={p.image}
                     title={p.title}

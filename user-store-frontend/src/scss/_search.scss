@@ -1,0 +1,22 @@
+.container-search {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  min-height: 100vh;
+
+  p {
+    text-transform: capitalize;
+    margin: 0.5rem;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .box-search {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

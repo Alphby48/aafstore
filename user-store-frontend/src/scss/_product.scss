@@ -70,6 +70,34 @@
       font-weight: 300;
       font-style: normal;
     }
+    .search {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      input {
+        width: 30%;
+        padding: 0.5rem;
+        border-radius: 10px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        border: none;
+      }
+      button {
+        margin-left: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        border: none;
+
+        background-color: rgb(39, 176, 255);
+        i {
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
     .all-product {
       width: 100%;
       display: flex;
@@ -107,6 +135,11 @@
       width: 100%;
       .all-product {
         justify-content: center;
+      }
+      .search {
+        input {
+          width: 70%;
+        }
       }
     }
   }

@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 // const productsSchema = require("../model/products");
-mongoose.connect(
-  "gak usah liat database gw, gak usah liat database gw, gak usah liat database gw, gak usah liat database gw"
-);
+mongoose.connect("APA LO LIAT LIAT DATABASE GW");
 
 // const product = new productsSchema({
 //   title: "Panci Stainless Zebra Sauce Pan 20 Cm",

@@ -12,6 +12,8 @@ import ProductPage from "./pages/product.jsx";
 import Category from "./pages/category.jsx";
 import DetaiPage from "./pages/detail.jsx";
 import ErrorPage from "./pages/404.jsx";
+import CartPage from "./pages/cart.jsx";
+import SearchPage from "./pages/search.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
   {
     path: "/product/detail/:id",
     element: <DetaiPage />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
+  },
+  {
+    path: "/search/:search",
+    element: <SearchPage />,
   },
 ]);
 
