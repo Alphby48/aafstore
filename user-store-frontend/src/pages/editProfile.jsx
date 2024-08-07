@@ -9,18 +9,39 @@ const EditProfile = () => {
   const [profile, setProfile] = useState([]);
   const [oldName, setOldName] = useState("");
   const [logMsg, setLogMsg] = useState(null);
+
   useEffect(() => {
-    const dataProfile = JSON.parse(localStorage.getItem("token"));
-    if (!dataProfile) {
+    const token = localStorage.getItem("token");
+    if (!token) {
       window.location.href = "/login";
-    } else {
-      PostProfile((res) => {
-        const data = res.find((d) => d._id === dataProfile.id);
-        setProfile(data);
-        setOldName(data);
-      });
+      return;
     }
+
+    const identy = JSON.parse(localStorage.getItem("token")).id;
+
+    PostProfile((res) => {
+      const dataSet = res.find((data) => data._id === identy);
+      if (dataSet) {
+        setProfile(dataSet);
+        setOldName(dataSet);
+      } else {
+        window.location.href = "/login";
+      }
+    });
   }, []);
+
+  // useEffect(() => {
+  //   const dataProfile = JSON.parse(localStorage.getItem("token"));
+  //   if (!dataProfile) {
+  //     window.location.href = "/login";
+  //   } else {
+  //     PostProfile((res) => {
+  //       const data = res.find((d) => d._id === dataProfile.id);
+  //       setProfile(data);
+  //       setOldName(data);
+  //     });
+  //   }
+  // }, []);
 
   const handleEdit = (e) => {
     e.preventDefault();

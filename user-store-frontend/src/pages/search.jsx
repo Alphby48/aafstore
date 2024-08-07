@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import { GetProducts } from "../service/products";
 import CardElement from "../components/fragment/card";
 import NavbarPage from "../components/fragment/navbar";
+import useValidasi from "../hooks/validasi";
 
 const SearchPage = () => {
   const { search } = useParams();
   const [products, setProducts] = useState([]);
+  useValidasi();
   useEffect(() => {
     GetProducts((res) => {
       const data = res.filter((p) =>

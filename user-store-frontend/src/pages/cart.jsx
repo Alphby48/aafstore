@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import NavbarPage from "../components/fragment/navbar";
 import { GetProducts } from "../service/products";
 import { removeItem } from "../redux/slices/cartSlices";
+import useValidasi from "../hooks/validasi";
 const CartPage = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [total, setTotal] = useState(0);
   const cart = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
+  useValidasi();
   useEffect(() => {
     GetProducts((res) => {
       setCartProduct(res);

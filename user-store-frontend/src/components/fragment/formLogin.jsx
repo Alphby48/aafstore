@@ -2,12 +2,25 @@ import InputLabel from "../element/inputLabel/inputLabel";
 import Button from "../element/button/button";
 import { AuthLogin } from "../../service/login";
 import { useEffect, useState } from "react";
+import { PostProfile } from "../../service/profile";
+import useValidasi from "../../hooks/validasi";
 const FormLogin = () => {
   const [info, setInfo] = useState("");
+
   useEffect(() => {
     const getLocal = localStorage.getItem("token");
     if (getLocal) {
-      window.location.href = "/product";
+      const identy = JSON.parse(localStorage.getItem("token")).id;
+
+      PostProfile((res) => {
+        const dataSet = res.find((data) => data._id === identy);
+        if (dataSet) {
+          window.location.href = "/product";
+        } else {
+          localStorage.removeItem("token");
+          localStorage.removeItem(identy);
+        }
+      });
     }
   }, []);
   const handleLogin = (e) => {

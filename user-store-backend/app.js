@@ -8,7 +8,7 @@ const { body, validationResult, check } = require("express-validator");
 const methodeOverride = require("method-override");
 
 // Access Database
-require("./utils/db");
+require("./utils/database");
 const aafSchema = require("./model/aaf");
 const productSchema = require("./model/products");
 

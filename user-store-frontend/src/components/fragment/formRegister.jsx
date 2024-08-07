@@ -15,6 +15,7 @@ const FormRegister = () => {
 
     AuthRegister(dataAuth, (res) => {
       setLogAuth(res);
+      console.log(res);
     });
   };
 

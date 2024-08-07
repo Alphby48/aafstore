@@ -3,8 +3,10 @@ import InputLabel from "../components/element/inputLabel/inputLabel";
 import { ChangePw } from "../service/changePw";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useValidasi from "../hooks/validasi";
 const ChangePasswordPage = () => {
   const [logChange, setLogChange] = useState(null);
+  useValidasi();
   const handleChange = (e) => {
     e.preventDefault();
     const data = {

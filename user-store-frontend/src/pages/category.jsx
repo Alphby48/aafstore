@@ -3,10 +3,12 @@ import CardElement from "../components/fragment/card";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetProducts } from "../service/products";
+import useValidasi from "../hooks/validasi";
 
 const Category = () => {
   const { ctg } = useParams();
   const [prdctg, setPrdctg] = useState([]);
+  useValidasi();
   useEffect(() => {
     GetProducts((res) => {
       setPrdctg(res);
