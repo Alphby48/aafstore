@@ -19,10 +19,10 @@ const ProductPage = () => {
     });
   }, []);
 
-  const logOutHandle = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
+  // const logOutHandle = () => {
+  //   localStorage.removeItem("token");
+  //   window.location.href = "/login";
+  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const ProductPage = () => {
 
   return (
     <div className="container-box">
-      <NavbarPage onClick={logOutHandle}></NavbarPage>
+      <NavbarPage></NavbarPage>
       <Carousel></Carousel>
       <div className="product">
         <SidebarProduct />

@@ -20,6 +20,15 @@ const aafSchema = mongoose.model("dataUser", {
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+  },
+  birthdate: {
+    type: String,
+  },
+  nohp: {
+    type: String,
+  },
 });
 
 module.exports = aafSchema;

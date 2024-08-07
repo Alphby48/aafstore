@@ -14,6 +14,9 @@ import DetaiPage from "./pages/detail.jsx";
 import ErrorPage from "./pages/404.jsx";
 import CartPage from "./pages/cart.jsx";
 import SearchPage from "./pages/search.jsx";
+import ProfilePage from "./pages/profile.jsx";
+import EditProfile from "./pages/editProfile.jsx";
+import ChangePasswordPage from "./pages/changePassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
   {
     path: "/search/:search",
     element: <SearchPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+  },
+  {
+    path: "/profile/edit",
+    element: <EditProfile />,
+  },
+  {
+    path: "/profile/change-password",
+    element: <ChangePasswordPage />,
   },
 ]);
 

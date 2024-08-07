@@ -55,7 +55,7 @@ const NavbarPage = (props) => {
         <div className="box-price">
           <p>{total}</p>
         </div>
-        <Link onClick={onClick} className="link-profile">
+        <Link to="/profile" className="link-profile">
           <i className="bi bi-person-circle"></i>
         </Link>
       </div>
