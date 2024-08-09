@@ -12,7 +12,7 @@ const FormLogin = () => {
     if (getLocal) {
       const identy = JSON.parse(localStorage.getItem("token")).id;
 
-      PostProfile((res) => {
+      PostProfile(identy, (res) => {
         const dataSet = res.find((data) => data._id === identy);
         if (dataSet) {
           window.location.href = "/product";

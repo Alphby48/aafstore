@@ -14,7 +14,7 @@ const useValidasi = () => {
 
     const identy = JSON.parse(localStorage.getItem("token")).id;
     setTokenId(identy);
-    PostProfile((res) => {
+    PostProfile(identy, (res) => {
       const dataSet = res.find((data) => data._id === identy);
       if (dataSet) {
         setLogId(dataSet._id);

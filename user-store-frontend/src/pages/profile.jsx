@@ -3,6 +3,8 @@ import NavbarPage from "../components/fragment/navbar";
 import { useState } from "react";
 import { PostProfile } from "../service/profile";
 import { Link } from "react-router-dom";
+import { RemoveAcc } from "../service/remove";
+import FootBarLayout from "../components/layouts/footbar";
 const ProfilePage = () => {
   const [profile, setProfile] = useState([]);
 
@@ -15,7 +17,7 @@ const ProfilePage = () => {
 
     const identy = JSON.parse(localStorage.getItem("token")).id;
 
-    PostProfile((res) => {
+    PostProfile(identy, (res) => {
       const dataSet = res.find((data) => data._id === identy);
       if (dataSet) {
         setProfile(dataSet);
@@ -41,6 +43,23 @@ const ProfilePage = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
   };
+
+  const handleRemove = (e) => {
+    e.preventDefault();
+    if (confirm("Do you want to delete your account?")) {
+      const tokenLocal = {
+        _id: e.target.remove.value,
+      };
+      console.log(tokenLocal);
+      RemoveAcc(tokenLocal, (res) => {
+        console.log(res);
+      });
+      localStorage.removeItem("token");
+      localStorage.removeItem(tokenLocal._id);
+      window.location.href = "/register";
+    }
+  };
+
   return (
     <>
       <NavbarPage></NavbarPage>
@@ -106,11 +125,26 @@ const ProfilePage = () => {
               <i className="bi bi-door-open-fill"></i>Log-Out
             </li>
             <li className="list-group-item">
-              <i className="bi bi-trash3"></i>Remove account
+              <form
+                action="_method=DELETE"
+                method="post"
+                onSubmit={handleRemove}
+              >
+                <input
+                  type="hidden"
+                  name="remove"
+                  id="remove"
+                  value={profile._id}
+                />
+                <button type="submit">
+                  <i className="bi bi-trash-fill"></i>Remove Account
+                </button>
+              </form>
             </li>
           </ul>
         </div>
       </div>
+      <FootBarLayout></FootBarLayout>
     </>
   );
 };

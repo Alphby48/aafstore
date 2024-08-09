@@ -6,6 +6,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./scss/style.scss";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
+import HomePage from "./pages/home.jsx";
 import LoginPage from "./pages/login.jsx";
 import RegisterPage from "./pages/register.jsx";
 import ProductPage from "./pages/product.jsx";
@@ -21,6 +22,7 @@ import ChangePasswordPage from "./pages/changePassword.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
   {

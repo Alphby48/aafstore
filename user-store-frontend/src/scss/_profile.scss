@@ -51,6 +51,12 @@
         font-size: 1.1rem;
         cursor: pointer;
         color: black;
+        form {
+          button {
+            border: none;
+            background-color: transparent;
+          }
+        }
         i {
           margin-right: 1rem;
         }

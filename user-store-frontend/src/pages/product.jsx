@@ -7,6 +7,7 @@ import { GetProducts } from "../service/products";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useValidasi from "../hooks/validasi";
+import FootBarLayout from "../components/layouts/footbar";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -67,6 +68,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+      <FootBarLayout></FootBarLayout>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const EditProfile = () => {
 
     const identy = JSON.parse(localStorage.getItem("token")).id;
 
-    PostProfile((res) => {
+    PostProfile(identy, (res) => {
       const dataSet = res.find((data) => data._id === identy);
       if (dataSet) {
         setProfile(dataSet);

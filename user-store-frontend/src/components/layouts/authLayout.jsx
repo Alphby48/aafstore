@@ -4,7 +4,9 @@ const AuthLayout = (props) => {
   return (
     <div className="authlayout">
       <div className="image">
-        <img src="./img/logo.png " alt="" />
+        <Link to={"/"}>
+          <img src="./img/logo.png " alt="" />
+        </Link>
       </div>
       <div className="auth-box">
         <h1>{title}</h1>

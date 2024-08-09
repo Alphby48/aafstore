@@ -124,11 +124,33 @@ app.get("/products", async (req, res) => {
   res.send(product);
 });
 
+// delete profile
+
+app.delete("/profile", async (req, res) => {
+  const valid = await aafSchema.findOne({ _id: req.body._id });
+  if (valid) {
+    aafSchema
+      .deleteOne({ _id: req.body._id })
+      .then((result) => {
+        res.send(`data telah dihapus ${valid.username}`);
+        console.log(`--------------------------------`);
+        console.log(`HAPUS DATA USER ${valid.username} ${new Date()}`);
+        console.log(`--------------------------------`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+});
+
 // profile
 
-app.get("/profile", async (req, res) => {
-  const profile = await aafSchema.find();
-  res.send(profile);
+app.get("/profile/:_id", async (req, res) => {
+  const profile = await aafSchema.findOne({ _id: req.params._id });
+  if (!profile) {
+    return res.send([{ _id: "000" }]);
+  }
+  res.send([profile]);
 });
 
 // edit profile

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetProducts } from "../service/products";
 import useValidasi from "../hooks/validasi";
-
+import FootBarLayout from "../components/layouts/footbar";
 const Category = () => {
   const { ctg } = useParams();
   const [prdctg, setPrdctg] = useState([]);

@@ -15,7 +15,7 @@ const NavbarPage = (props) => {
     <div className="navigator fixed-top">
       <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div className="container-fluid">
-          <Link>
+          <Link to={"/"}>
             <img src="/img/logo.png" alt="" />
           </Link>
           <button
@@ -31,12 +31,10 @@ const NavbarPage = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav ">
-              <a className="nav-link" href="/">
+              <a className="nav-link active" href="/">
                 Home
               </a>
-              <a className="nav-link" href="#">
-                About
-              </a>
+
               <a
                 className="nav-link active"
                 aria-current="page"
