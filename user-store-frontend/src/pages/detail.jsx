@@ -16,7 +16,7 @@ const DetaiPage = () => {
   const popRef = useRef(null);
   const local = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
-    GetProducts((res) => {
+    GetProducts(local.id, (res) => {
       setProductDetail(res);
     });
   }, [id]);

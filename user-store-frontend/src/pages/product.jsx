@@ -17,7 +17,7 @@ const ProductPage = () => {
     if (!local) {
       window.location.href = "/login";
     }
-    GetProducts((res) => {
+    GetProducts(local.id, (res) => {
       setProducts(res);
     });
   }, []);

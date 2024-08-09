@@ -1,5 +1,8 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 // const expressLayouts = require("express-ejs-layouts");
+const multer = require("multer");
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -11,6 +14,7 @@ const methodeOverride = require("method-override");
 require("./utils/database");
 const aafSchema = require("./model/aaf");
 const productSchema = require("./model/products");
+const { default: mongoose } = require("mongoose");
 
 // connection
 
@@ -46,11 +50,21 @@ app.use(
 );
 app.use(flash());
 
+// Setup multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+
 //
 
 app.get("/", async (req, res) => {
-  const data = await aafSchema.find();
-  res.send("ngapain?....");
+  res.send("daripada liatin API orang. Mending liat JKT48");
 });
 
 // register
@@ -78,6 +92,7 @@ app.post(
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        date: new Date(),
       };
       aafSchema.create(database).then((result) => {
         console.log(`--------------------------------`);
@@ -119,9 +134,17 @@ app.post("/login", async (req, res) => {
 
 // products
 
-app.get("/products", async (req, res) => {
-  const product = await productSchema.find();
-  res.send(product);
+app.get("/products/:us", async (req, res) => {
+  try {
+    const valid = await aafSchema.findOne({ _id: req.params.us });
+    if (!valid) {
+      return res.send("data tidak ditemukan");
+    }
+    const product = await productSchema.find();
+    res.send(product);
+  } catch (error) {
+    res.send("data tidak ditemukan");
+  }
 });
 
 // delete profile
@@ -145,12 +168,16 @@ app.delete("/profile", async (req, res) => {
 
 // profile
 
-app.get("/profile/:_id", async (req, res) => {
-  const profile = await aafSchema.findOne({ _id: req.params._id });
-  if (!profile) {
-    return res.send([{ _id: "000" }]);
+app.get("/profile/:us", async (req, res) => {
+  try {
+    const profile = await aafSchema.findOne({ _id: req.params.us });
+    if (!profile) {
+      res.send([{ _id: "000", msg: "nyari apa sih....? mau liat API ?" }]);
+    }
+    res.send([profile]);
+  } catch (error) {
+    res.send([{ _id: "000", msg: "nyari apa sih....? mau liat API ?" }]);
   }
-  res.send([profile]);
 });
 
 // edit profile
@@ -257,6 +284,12 @@ app.put(
     }
   }
 );
+
+// post img
+app.post("/upload", upload.single("img"), (req, res) => {
+  const filePath = `/uploads/${req.file.filename}`;
+  res.json({ imageUrl: filePath });
+});
 
 //404
 

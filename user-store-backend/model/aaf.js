@@ -29,6 +29,9 @@ const aafSchema = mongoose.model("dataUser", {
   nohp: {
     type: String,
   },
+  date: {
+    type: String,
+  },
 });
 
 module.exports = aafSchema;

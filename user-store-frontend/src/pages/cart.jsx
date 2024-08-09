@@ -12,7 +12,8 @@ const CartPage = () => {
   const dispatch = useDispatch();
   useValidasi();
   useEffect(() => {
-    GetProducts((res) => {
+    const local = JSON.parse(localStorage.getItem("token")).id;
+    GetProducts(local, (res) => {
       setCartProduct(res);
     });
   }, []);
