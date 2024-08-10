@@ -11,6 +11,7 @@ import FootBarLayout from "../components/layouts/footbar";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
+
   useValidasi();
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("token"));

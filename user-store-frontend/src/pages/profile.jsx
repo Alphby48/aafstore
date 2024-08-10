@@ -67,7 +67,14 @@ const ProfilePage = () => {
         <h1>Profile</h1>
         <div className="profile-box">
           <div className="profile-image">
-            <img src="/img/logo.png" alt="" />
+            <img
+              src={
+                profile.imageUrl
+                  ? `http://192.168.1.80:3000/uploads/${profile.imageUrl}`
+                  : "/icons/profile.svg"
+              }
+              alt=""
+            />
           </div>
           <div className="profile-data">
             <table className="table">
@@ -105,6 +112,14 @@ const ProfilePage = () => {
         <h1>Setting</h1>
         <div className="setting">
           <ul className="list-group">
+            <li className="list-group-item">
+              <Link
+                to={"/profile/photo"}
+                className="text-decoration-none text-dark"
+              >
+                <i className="bi bi-image"></i>Set Photo Profile
+              </Link>
+            </li>
             <li className="list-group-item">
               <Link
                 to={"/profile/edit"}

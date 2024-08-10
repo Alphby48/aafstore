@@ -3,14 +3,25 @@ import { useSelector } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlices";
 import { useEffect } from "react";
 import { useState } from "react";
+import { PostProfile } from "../../service/profile";
 const NavbarPage = (props) => {
+  const LocalS = JSON.parse(localStorage.getItem("token"));
   const [total, setTotal] = useState(0);
-  const { onClick } = props;
   const cart = useSelector((state) => state.cart.data);
+  const [propil, setPropil] = useState([]);
+
+  useEffect(() => {
+    PostProfile(LocalS.id, (res) => {
+      const dtaset = res.find((data) => data._id === LocalS.id);
+      setPropil(dtaset);
+    });
+  }, []);
+
   useEffect(() => {
     const sum = cart.reduce((a, b) => a + b.qty, 0);
     setTotal(sum);
   }, [cart]);
+
   return (
     <div className="navigator fixed-top">
       <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -54,7 +65,14 @@ const NavbarPage = (props) => {
           <p>{total}</p>
         </div>
         <Link to="/profile" className="link-profile">
-          <i className="bi bi-person-circle"></i>
+          <img
+            src={
+              propil.imageUrl
+                ? `http://192.168.1.80:3000/uploads/${propil.imageUrl}`
+                : "/icons/profile.svg"
+            }
+            alt=""
+          />
         </Link>
       </div>
     </div>

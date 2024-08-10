@@ -93,6 +93,16 @@ const EditProfile = () => {
             onChange={(e) => setProfile({ username: e.target.value })}
           ></InputLabel>
           <InputLabel
+            textLabel="Birthdate"
+            type="date"
+            name="birthdate"
+            placeholder="masukan birthdate"
+            klasLabel="edit-label"
+            klasInput="edit-control"
+            value={profile.birthdate}
+            onChange={(e) => setProfile({ birthdate: e.target.value })}
+          ></InputLabel>
+          <InputLabel
             textLabel="Nama"
             type="text"
             name="name"
@@ -119,16 +129,7 @@ const EditProfile = () => {
               <option value="Other">Other</option>
             </select>
           </div>
-          <InputLabel
-            textLabel="Birthdate"
-            type="date"
-            name="birthdate"
-            placeholder="masukan birthdate"
-            klasLabel="edit-label"
-            klasInput="edit-control"
-            value={profile.birthdate}
-            onChange={(e) => setProfile({ birthdate: e.target.value })}
-          ></InputLabel>
+
           <InputLabel
             textLabel="Gmail"
             type="email"

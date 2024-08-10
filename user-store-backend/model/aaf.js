@@ -32,6 +32,9 @@ const aafSchema = mongoose.model("dataUser", {
   date: {
     type: String,
   },
+  imageUrl: {
+    type: String,
+  },
 });
 
 module.exports = aafSchema;

@@ -2,7 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 // const expressLayouts = require("express-ejs-layouts");
-const multer = require("multer");
+// const multer = require("multer");
+const { Uploaded } = require("./controllers/upoadImage.js");
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -51,15 +52,15 @@ app.use(
 app.use(flash());
 
 // Setup multer
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "./public/uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage: storage });
 
 //
 
@@ -286,10 +287,7 @@ app.put(
 );
 
 // post img
-app.post("/upload", upload.single("img"), (req, res) => {
-  const filePath = `/uploads/${req.file.filename}`;
-  res.json({ imageUrl: filePath });
-});
+app.put("/upload", Uploaded);
 
 //404
 

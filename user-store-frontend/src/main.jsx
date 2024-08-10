@@ -16,6 +16,7 @@ import ErrorPage from "./pages/404.jsx";
 import CartPage from "./pages/cart.jsx";
 import SearchPage from "./pages/search.jsx";
 import ProfilePage from "./pages/profile.jsx";
+import PhotoPage from "./pages/photo.jsx";
 import EditProfile from "./pages/editProfile.jsx";
 import ChangePasswordPage from "./pages/changePassword.jsx";
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "/profile/photo",
+    element: <PhotoPage />,
   },
   {
     path: "/profile/edit",

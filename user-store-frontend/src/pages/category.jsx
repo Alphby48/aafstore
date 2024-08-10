@@ -9,8 +9,9 @@ const Category = () => {
   const { ctg } = useParams();
   const [prdctg, setPrdctg] = useState([]);
   useValidasi();
+  const local = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
-    GetProducts((res) => {
+    GetProducts(local.id, (res) => {
       setPrdctg(res);
     });
   }, [ctg]);
