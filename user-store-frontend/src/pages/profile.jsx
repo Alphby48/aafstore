@@ -46,17 +46,24 @@ const ProfilePage = () => {
 
   const handleRemove = (e) => {
     e.preventDefault();
-    if (confirm("Do you want to delete your account?")) {
+    if (
+      confirm(
+        "Do you want to delete your account? \n if yes, click OK and wait for 2 seconds"
+      )
+    ) {
       const tokenLocal = {
         _id: e.target.remove.value,
+        imageUrl: e.target.removeImg.value,
       };
       console.log(tokenLocal);
       RemoveAcc(tokenLocal, (res) => {
         console.log(res);
       });
-      localStorage.removeItem("token");
-      localStorage.removeItem(tokenLocal._id);
-      window.location.href = "/register";
+      setTimeout(() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem(tokenLocal._id);
+        window.location.href = "/register";
+      }, 2000);
     }
   };
 
@@ -151,6 +158,13 @@ const ProfilePage = () => {
                   id="remove"
                   value={profile._id}
                 />
+                <input
+                  type="hidden"
+                  name="removeImg"
+                  id="removeImg"
+                  value={profile.imageUrl ? profile.imageUrl : "non.jpg"}
+                />
+
                 <button type="submit">
                   <i className="bi bi-trash-fill"></i>Remove Account
                 </button>

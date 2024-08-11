@@ -4,6 +4,7 @@ const path = require("path");
 // const expressLayouts = require("express-ejs-layouts");
 // const multer = require("multer");
 const { Uploaded } = require("./controllers/upoadImage.js");
+const { deleteAccount } = require("./controllers/deleteAccount.js");
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -164,6 +165,12 @@ app.delete("/profile", async (req, res) => {
       .catch((err) => {
         console.log(err);
       });
+
+    const fileImg = req.body.imageUrl;
+    const filepath = path.join(__dirname, "./public/uploads", fileImg);
+    if (fs.existsSync(filepath)) {
+      return fs.unlinkSync(filepath);
+    }
   }
 });
 
@@ -173,11 +180,13 @@ app.get("/profile/:us", async (req, res) => {
   try {
     const profile = await aafSchema.findOne({ _id: req.params.us });
     if (!profile) {
-      res.send([{ _id: "000", msg: "nyari apa sih....? mau liat API ?" }]);
+      return res.send([
+        { _id: "000", msg: "nyari apa sih....? mau liat API ?" },
+      ]);
     }
     res.send([profile]);
   } catch (error) {
-    res.send([{ _id: "000", msg: "nyari apa sih....? mau liat API ?" }]);
+    return res.send([{ _id: "000", msg: "nyari apa sih....? mau liat API ?" }]);
   }
 });
 

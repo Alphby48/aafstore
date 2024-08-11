@@ -21,20 +21,22 @@ const PhotoPage = () => {
   const handlePreview = (e) => {
     setChangePp(URL.createObjectURL(e.target.files[0]));
   };
-
+  console.log(changePp);
   const handleUpload = (e) => {
     e.preventDefault();
-    const data = {
-      id: e.target.id.value,
-      image: e.target.image.value,
-      img: e.target.img.files[0],
-    };
+    const formData = new FormData();
+    formData.append("id", e.target.id.value);
+    formData.append("image", e.target.image.value);
+    formData.append("img", e.target.img.files[0]);
 
-    PostPhoto(data, (res) => {
+    PostPhoto(formData, (res) => {
       setLogg(res);
-    });
 
-    window.location.href = "/profile";
+      console.log(res);
+      setTimeout(() => {
+        window.location.href = "/profile";
+      }, 2000);
+    });
   };
 
   return (
@@ -61,7 +63,14 @@ const PhotoPage = () => {
               value={profile.imageUrl}
               id="image"
             />
-            <input type="file" name="img" id="img" onChange={handlePreview} />
+            <input
+              type="file"
+              name="img"
+              id="img"
+              accept="image/*"
+              required
+              onChange={handlePreview}
+            />
             <button type="submit" className="btn btn-primary">
               Upload
             </button>

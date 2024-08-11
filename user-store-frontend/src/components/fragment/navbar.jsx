@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { PostProfile } from "../../service/profile";
 const NavbarPage = (props) => {
-  const LocalS = JSON.parse(localStorage.getItem("token"));
+  const LocalS = JSON.parse(localStorage.getItem("token")) || [{ id: "0" }];
   const [total, setTotal] = useState(0);
   const cart = useSelector((state) => state.cart.data);
   const [propil, setPropil] = useState([]);
@@ -67,7 +67,7 @@ const NavbarPage = (props) => {
         <Link to="/profile" className="link-profile">
           <img
             src={
-              propil.imageUrl
+              propil && propil.imageUrl
                 ? `http://192.168.1.80:3000/uploads/${propil.imageUrl}`
                 : "/icons/profile.svg"
             }
