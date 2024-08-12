@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const url = import.meta.env.VITE_API_URL;
 export const ChangePw = (data, call) => {
   axios
-    .put("http://192.168.1.80:3000/change-password", data, {
+    .put(`${url}/change-password`, data, {
       headers: {
         "Content-Type": "application/json",
       },

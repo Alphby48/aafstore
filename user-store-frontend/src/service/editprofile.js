@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const url = import.meta.env.VITE_API_URL;
 export const EditPostProfile = (data, call) => {
   axios
-    .put("http://192.168.1.80:3000/profile", data, {
+    .put(`${url}/profile`, data, {
       headers: {
         "Content-Type": "application/json",
       },

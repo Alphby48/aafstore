@@ -1,9 +1,9 @@
+const aafSchema = require("../model/aaf");
 const fs = require("fs");
 const path = require("path");
-const aafSchema = require("../model/aaf");
 
-const deleteAccount = [
-  async (req, res) => {
+const deleteAccount = async (req, res) => {
+  try {
     const valid = await aafSchema.findOne({ _id: req.body._id });
     if (valid) {
       aafSchema
@@ -19,12 +19,14 @@ const deleteAccount = [
         });
 
       const fileImg = req.body.imageUrl;
-      const filepath = path.join(__dirname, "./public/uploads", fileImg);
+      const filepath = path.join(__dirname, "../public/uploads", fileImg);
       if (fs.existsSync(filepath)) {
         return fs.unlinkSync(filepath);
       }
     }
-  },
-];
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = { deleteAccount };

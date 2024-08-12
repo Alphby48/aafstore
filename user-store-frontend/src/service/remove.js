@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const url = import.meta.env.VITE_API_URL;
 export const RemoveAcc = (data, call) => {
   axios
-    .delete("http://192.168.1.80:3000/profile", {
+    .delete(`${url}/profile`, {
       headers: {
         "Content-Type": "application/json",
       },

@@ -34,7 +34,7 @@
     }
     .link-profile {
       display: flex;
-      align-items: center;
+
       justify-content: center;
       margin-left: 10px;
 
@@ -77,6 +77,13 @@
     }
     .boxcart {
       width: 30%;
+      .link-profile {
+        img {
+          width: 2.9rem;
+          height: 2.9rem;
+          background-color: rgb(255, 255, 255);
+        }
+      }
     }
   }
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const url = import.meta.env.VITE_API_URL;
 export const PostProfile = (data, call) => {
   axios
-    .get(`http://192.168.1.80:3000/profile/${data}`)
+    .get(`${url}/profile/${data}`)
     .then((res) => call(res.data))
     .catch((err) => call(err));
 };

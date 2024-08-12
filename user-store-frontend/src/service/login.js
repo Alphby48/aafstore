@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const url = import.meta.env.VITE_API_URL;
 export const AuthLogin = (data, call) => {
   axios
-    .post("http://192.168.1.80:3000/login", data, {
+    .post(`${url}/login`, data, {
       headers: {
         "Content-Type": "application/json",
       },
