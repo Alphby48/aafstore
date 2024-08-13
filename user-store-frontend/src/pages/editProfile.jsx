@@ -5,6 +5,7 @@ import InputLabel from "../components/element/inputLabel/inputLabel";
 import { EditPostProfile } from "../service/editprofile";
 import { Link } from "react-router-dom";
 import NavbarPage from "../components/fragment/navbar";
+//
 const EditProfile = () => {
   const [profile, setProfile] = useState([]);
   const [oldName, setOldName] = useState("");
@@ -16,9 +17,7 @@ const EditProfile = () => {
       window.location.href = "/login";
       return;
     }
-
     const identy = JSON.parse(localStorage.getItem("token")).id;
-
     PostProfile(identy, (res) => {
       const dataSet = res.find((data) => data._id === identy);
       if (dataSet) {
@@ -29,19 +28,6 @@ const EditProfile = () => {
       }
     });
   }, []);
-
-  // useEffect(() => {
-  //   const dataProfile = JSON.parse(localStorage.getItem("token"));
-  //   if (!dataProfile) {
-  //     window.location.href = "/login";
-  //   } else {
-  //     PostProfile((res) => {
-  //       const data = res.find((d) => d._id === dataProfile.id);
-  //       setProfile(data);
-  //       setOldName(data);
-  //     });
-  //   }
-  // }, []);
 
   const handleEdit = (e) => {
     e.preventDefault();

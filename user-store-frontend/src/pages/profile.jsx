@@ -27,18 +27,6 @@ const ProfilePage = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const dataProfile = JSON.parse(localStorage.getItem("token"));
-  //   if (!dataProfile) {
-  //     window.location.href = "/login";
-  //   } else {
-  //     PostProfile((res) => {
-  //       const data = res.find((d) => d._id === dataProfile.id);
-  //       setProfile(data);
-  //     });
-  //   }
-  // }, []);
-
   const handlelogOut = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
@@ -77,7 +65,9 @@ const ProfilePage = () => {
             <img
               src={
                 profile.imageUrl
-                  ? `http://192.168.1.80:3000/uploads/${profile.imageUrl}`
+                  ? `${import.meta.env.VITE_API_URL}/uploads/${
+                      profile.imageUrl
+                    }`
                   : "/icons/profile.svg"
               }
               alt=""

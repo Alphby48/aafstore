@@ -1,23 +1,4 @@
-import { addToCart } from "../../redux/slices/cartSlices";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import Button from "../element/button/button";
-const ModalBox = (props) => {
-  const { val } = props;
-  const dispatch = useDispatch();
-  const [qtyVal, setQtyVal] = useState(1);
-
-  const handleTambah = () => {
-    if (qtyVal < 10) {
-      setQtyVal(qtyVal + 1);
-    }
-  };
-
-  const handleKurang = () => {
-    if (qtyVal > 1) {
-      setQtyVal(qtyVal - 1);
-    }
-  };
+const ModalBox = () => {
   return (
     <div
       className="modal fade"

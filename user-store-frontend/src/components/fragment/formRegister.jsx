@@ -1,7 +1,7 @@
 import InputLabel from "../element/inputLabel/inputLabel";
 import Button from "../element/button/button";
 import { AuthRegister } from "../../service/auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 const FormRegister = () => {
   const [logAuth, setLogAuth] = useState();
   const handleClick = (e) => {

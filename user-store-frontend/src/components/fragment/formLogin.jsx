@@ -3,7 +3,6 @@ import Button from "../element/button/button";
 import { AuthLogin } from "../../service/login";
 import { useEffect, useState } from "react";
 import { PostProfile } from "../../service/profile";
-import useValidasi from "../../hooks/validasi";
 const FormLogin = () => {
   const [info, setInfo] = useState("");
 
@@ -46,7 +45,6 @@ const FormLogin = () => {
         console.log(res);
         setInfo("username atau password salah");
       }
-      // console.log(res);
     });
   };
   return (

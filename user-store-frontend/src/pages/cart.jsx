@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import NavbarPage from "../components/fragment/navbar";
 import { GetProducts } from "../service/products";
-import { removeItem } from "../redux/slices/cartSlices";
+import { statusCart } from "../redux/slices/cartSlices";
 import useValidasi from "../hooks/validasi";
+import { getCart } from "../service/getCart";
+import { RemoveCart } from "../service/removeCart";
+//
 const CartPage = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [total, setTotal] = useState(0);
-  const cart = useSelector((state) => state.cart.data);
+  const stscart = useSelector((state) => state.cart.data);
+  const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
+  //
   useValidasi();
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("token")).id;
@@ -19,19 +24,36 @@ const CartPage = () => {
   }, []);
 
   useEffect(() => {
+    const local = JSON.parse(localStorage.getItem("token")).id;
+    getCart(local, (res) => {
+      const data = res.find((d) => d.org === local);
+      setCart(data.idCart);
+    });
+  }, [stscart]);
+
+  useEffect(() => {
     if (cart.length > 0 && cartProduct.length > 0) {
       const sum = cart.reduce((acc, item) => {
-        const prd = cartProduct.find((p) => p._id === item._id);
+        const prd = cartProduct.find((p) => p._id === item.idP);
         return acc + parseInt(prd.price) * item.qty;
       }, 0);
       setTotal(sum);
     }
   }, [cart, cartProduct]);
 
+  const handleRemoveCart = (id) => {
+    const data = {
+      org: JSON.parse(localStorage.getItem("token")).id,
+      idP: id,
+    };
+    RemoveCart(data, (res) => {
+      dispatch(statusCart(res));
+    });
+  };
+
   return (
     <>
       <NavbarPage></NavbarPage>
-
       <div className="container-cart">
         <h1>
           Shopping Cart <i className="bi bi-cart4"></i>
@@ -39,7 +61,7 @@ const CartPage = () => {
         <div className="box-cart">
           {cartProduct.length > 0 &&
             cart.map((c) => {
-              const product = cartProduct.find((p) => p._id === c._id);
+              const product = cartProduct.find((p) => p._id === c.idP);
               return (
                 <div className="item-cart" key={c._id}>
                   <Link to={`/product/detail/${product._id}`}>
@@ -82,7 +104,7 @@ const CartPage = () => {
                   <div className="cart-del">
                     <i
                       className="bi bi-trash"
-                      onClick={() => dispatch(removeItem(c._id)) && setTotal(0)}
+                      onClick={() => handleRemoveCart(product._id)}
                     ></i>
                   </div>
                 </div>

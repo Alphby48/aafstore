@@ -4,9 +4,11 @@ import { ChangePw } from "../service/changePw";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useValidasi from "../hooks/validasi";
+//
 const ChangePasswordPage = () => {
   const [logChange, setLogChange] = useState(null);
   useValidasi();
+
   const handleChange = (e) => {
     e.preventDefault();
     const data = {
@@ -38,18 +40,6 @@ const ChangePasswordPage = () => {
               {logChange}
             </div>
           )}
-          {/* {logChange === null ? (
-            ""
-          ) : (
-            <div className="alert alert-success" role="alert">
-              {logChange &&
-                Array.isArray(logChange) &&
-                logChange.length > 0 &&
-                logChange.map((l, i) => {
-                  return <p key={i}>{l.msg}</p>;
-                })}
-            </div>
-          )} */}
           <InputLabel
             textLabel="Password"
             type="password"

@@ -2,29 +2,22 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetProducts } from "../service/products";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { addToCart } from "../redux/slices/cartSlices";
+import { statusCart } from "../redux/slices/cartSlices";
 import NavbarPage from "../components/fragment/navbar";
 import ModalBox from "../components/fragment/modal";
-import { useRef } from "react";
+import { addCart } from "../service/addCart";
 const DetaiPage = () => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
   const [qtyVal, setQtyVal] = useState(1);
-  const cart = useSelector((state) => state.cart.data);
-  const popRef = useRef(null);
+
   const local = JSON.parse(localStorage.getItem("token"));
   useEffect(() => {
     GetProducts(local.id, (res) => {
       setProductDetail(res);
     });
   }, [id]);
-
-  useEffect(() => {
-    localStorage.setItem(local.id, JSON.stringify(cart));
-    console.log(cart);
-  }, [cart]);
 
   const handleTambah = () => {
     if (qtyVal < 10) {
@@ -39,6 +32,18 @@ const DetaiPage = () => {
   };
 
   const product = productDetail.find((p) => p._id === id);
+
+  const handleAddCart = () => {
+    const data = {
+      org: local.id,
+      idP: product._id,
+      qty: qtyVal,
+    };
+
+    addCart(data, (res) => {
+      dispatch(statusCart(res));
+    });
+  };
 
   return (
     <>
@@ -82,10 +87,7 @@ const DetaiPage = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     className="btn btn-warning btn-cart"
-                    onClick={() =>
-                      dispatch(addToCart({ _id: product._id, qty: qtyVal })) &&
-                      console.log(product._id)
-                    }
+                    onClick={handleAddCart}
                   >
                     <i className="bi bi-cart-plus"></i>
                   </button>

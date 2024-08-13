@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
 import SidebarProduct from "../components/fragment/sidebar-prd";
 import NavbarPage from "../components/fragment/navbar";
 import Carousel from "../components/fragment/carousel";
 import CardElement from "../components/fragment/card";
 import { GetProducts } from "../service/products";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import useValidasi from "../hooks/validasi";
 import FootBarLayout from "../components/layouts/footbar";
 
@@ -13,6 +11,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
 
   useValidasi();
+
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("token"));
     if (!local) {
@@ -22,11 +21,6 @@ const ProductPage = () => {
       setProducts(res);
     });
   }, []);
-
-  // const logOutHandle = () => {
-  //   localStorage.removeItem("token");
-  //   window.location.href = "/login";
-  // };
 
   const handleSearch = (e) => {
     e.preventDefault();

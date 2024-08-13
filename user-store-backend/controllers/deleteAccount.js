@@ -1,4 +1,5 @@
 const aafSchema = require("../model/aaf");
+const cartSchema = require("../model/cart");
 const fs = require("fs");
 const path = require("path");
 
@@ -12,6 +13,17 @@ const deleteAccount = async (req, res) => {
           res.send(`data telah dihapus ${valid.username}`);
           console.log(`--------------------------------`);
           console.log(`HAPUS DATA USER ${valid.username} ${new Date()}`);
+          console.log(`--------------------------------`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      cartSchema
+        .deleteOne({ org: req.body._id })
+        .then((result) => {
+          console.log(`--------------------------------`);
+          console.log(`HAPUS DATA CART ${req.body._id} ${new Date()}`);
           console.log(`--------------------------------`);
         })
         .catch((err) => {

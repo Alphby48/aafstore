@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { addToCart } from "../../redux/slices/cartSlices";
 import { useEffect } from "react";
 import { useState } from "react";
 import { PostProfile } from "../../service/profile";
+import { getCart } from "../../service/getCart";
 const NavbarPage = (props) => {
   const LocalS = JSON.parse(localStorage.getItem("token")) || [{ id: "0" }];
   const [total, setTotal] = useState(0);
-  const cart = useSelector((state) => state.cart.data);
+  const stsCart = useSelector((state) => state.cart.data);
+  const [cart, setCart] = useState([]);
   const [propil, setPropil] = useState([]);
 
   useEffect(() => {
@@ -16,6 +17,13 @@ const NavbarPage = (props) => {
       setPropil(dtaset);
     });
   }, []);
+
+  useEffect(() => {
+    getCart(LocalS.id, (res) => {
+      const data = res.find((d) => d.org === LocalS.id);
+      setCart(data.idCart);
+    });
+  }, [stsCart]);
 
   useEffect(() => {
     const sum = cart.reduce((a, b) => a + b.qty, 0);
@@ -68,7 +76,7 @@ const NavbarPage = (props) => {
           <img
             src={
               propil && propil.imageUrl
-                ? `http://192.168.1.80:3000/uploads/${propil.imageUrl}`
+                ? `${import.meta.env.VITE_API_URL}/uploads/${propil.imageUrl}`
                 : "/icons/profile.svg"
             }
             alt=""
