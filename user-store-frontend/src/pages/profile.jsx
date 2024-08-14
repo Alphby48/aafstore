@@ -7,6 +7,10 @@ import { RemoveAcc } from "../service/remove";
 import FootBarLayout from "../components/layouts/footbar";
 const ProfilePage = () => {
   const [profile, setProfile] = useState([]);
+  const [hideId, setHideId] = useState(profile._id);
+  const [hideImg, setHideImg] = useState(
+    profile.imageUrl ? profile.imageUrl : "non.jpg"
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,6 +38,7 @@ const ProfilePage = () => {
 
   const handleRemove = (e) => {
     e.preventDefault();
+    e.target.submit();
     if (
       confirm(
         "Do you want to delete your account? \n if yes, click OK and wait for 2 seconds"
@@ -138,7 +143,9 @@ const ProfilePage = () => {
             </li>
             <li className="list-group-item">
               <form
-                action="_method=DELETE"
+                action={`${
+                  import.meta.env.VITE_API_URL
+                }/profile?_method=DELETE`}
                 method="post"
                 onSubmit={handleRemove}
               >

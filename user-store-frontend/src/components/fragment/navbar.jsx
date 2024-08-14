@@ -20,8 +20,10 @@ const NavbarPage = (props) => {
 
   useEffect(() => {
     getCart(LocalS.id, (res) => {
-      const data = res.find((d) => d.org === LocalS.id);
-      setCart(data.idCart);
+      if (res.length > 0) {
+        const data = res.find((d) => d.org === LocalS.id);
+        setCart(data.idCart);
+      }
     });
   }, [stsCart]);
 

@@ -1,7 +1,7 @@
 {
   "name": "aaf-store-2",
   "private": true,
-  "homepage": "https://aafstore.69dev.id/",
+  "homepage": "https://aafstore.69dev.id",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

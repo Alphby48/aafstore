@@ -10,7 +10,9 @@ const Category = () => {
   const [prdctg, setPrdctg] = useState([]);
   //
   useValidasi();
-  const local = JSON.parse(localStorage.getItem("token"));
+  const local = JSON.parse(localStorage.getItem("token")) || {
+    id: 1,
+  };
   useEffect(() => {
     GetProducts(local.id, (res) => {
       setPrdctg(res);

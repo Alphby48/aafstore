@@ -6,16 +6,23 @@ import { statusCart } from "../redux/slices/cartSlices";
 import NavbarPage from "../components/fragment/navbar";
 import ModalBox from "../components/fragment/modal";
 import { addCart } from "../service/addCart";
+import useValidasi from "../hooks/validasi";
 const DetaiPage = () => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
   const dispatch = useDispatch();
   const [qtyVal, setQtyVal] = useState(1);
 
-  const local = JSON.parse(localStorage.getItem("token"));
+  const local = JSON.parse(localStorage.getItem("token")) || {
+    id: 1,
+  };
+
+  useValidasi();
+
   useEffect(() => {
     GetProducts(local.id, (res) => {
-      setProductDetail(res);
+      const prd = res.find((p) => p._id === id);
+      setProductDetail(prd);
     });
   }, [id]);
 
@@ -31,12 +38,12 @@ const DetaiPage = () => {
     }
   };
 
-  const product = productDetail.find((p) => p._id === id);
+  //const product = productDetail.find((p) => p._id === id);
 
   const handleAddCart = () => {
     const data = {
       org: local.id,
-      idP: product._id,
+      idP: productDetail._id,
       qty: qtyVal,
     };
 
@@ -49,20 +56,20 @@ const DetaiPage = () => {
     <>
       <NavbarPage></NavbarPage>
       <div className="container-detail">
-        {productDetail.length > 0 && (
+        {
           <div className="box-detail">
             <div className="detail-img">
-              <img src={product.image} alt="" />
+              <img src={productDetail.image} alt="" />
             </div>
             <div className="detail-body">
-              <h1>{product.title}</h1>
+              <h1>{productDetail.title}</h1>
               <h2>
-                {parseInt(product.price).toLocaleString("id-ID", {
+                {parseInt(productDetail.price).toLocaleString("id-ID", {
                   style: "currency",
                   currency: "IDR",
                 })}
               </h2>
-              <p className="desc">Descriptions: {product.description}</p>
+              <p className="desc">Descriptions: {productDetail.description}</p>
               <div className="user-act">
                 <div className="detail-jumlah">
                   <div className="qty-jumlah">
@@ -96,7 +103,7 @@ const DetaiPage = () => {
               </div>
             </div>
           </div>
-        )}
+        }
       </div>
       <ModalBox></ModalBox>
     </>

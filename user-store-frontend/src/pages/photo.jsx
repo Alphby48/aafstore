@@ -11,9 +11,9 @@ const PhotoPage = () => {
   useValidasi();
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token")).id;
-    PostProfile(token, (res) => {
-      const set = res.find((d) => d._id === token);
+    const token = JSON.parse(localStorage.getItem("token")) || { id: 1 };
+    PostProfile(token.id, (res) => {
+      const set = res.find((d) => d._id === token.id);
       setProfile(set);
     });
   }, []);
@@ -55,7 +55,11 @@ const PhotoPage = () => {
             <p>Preview:</p>
             <img src={changePp} alt="profile" />
           </div>
-          <form action="_method=PUT" method="post" onSubmit={handleUpload}>
+          <form
+            action={`${import.meta.env.VITE_API_URL}/upload?_method=PUT`}
+            method="post"
+            onSubmit={handleUpload}
+          >
             <input type="hidden" name="id" value={profile._id} id="id" />
             <input
               type="hidden"

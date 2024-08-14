@@ -17,17 +17,23 @@ const CartPage = () => {
   //
   useValidasi();
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem("token")).id;
-    GetProducts(local, (res) => {
+    const local = JSON.parse(localStorage.getItem("token")) || {
+      id: 1,
+    };
+    GetProducts(local.id, (res) => {
       setCartProduct(res);
     });
   }, []);
 
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem("token")).id;
-    getCart(local, (res) => {
-      const data = res.find((d) => d.org === local);
-      setCart(data.idCart);
+    const local = JSON.parse(localStorage.getItem("token")) || {
+      id: 1,
+    };
+    getCart(local.id, (res) => {
+      if (res.length > 0) {
+        const data = res.find((d) => d.org === local.id);
+        setCart(data.idCart);
+      }
     });
   }, [stscart]);
 

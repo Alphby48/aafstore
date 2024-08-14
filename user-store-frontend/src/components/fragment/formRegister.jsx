@@ -20,7 +20,7 @@ const FormRegister = () => {
   };
 
   return (
-    <form method="post" action="" className="register" onSubmit={handleClick}>
+    <form method="post" className="register" onSubmit={handleClick}>
       {logAuth &&
         Array.isArray(logAuth) &&
         logAuth.length > 0 &&

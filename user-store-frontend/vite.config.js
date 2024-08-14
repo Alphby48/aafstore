@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0",
+    proxy: {
+      "/api": "https://serveraaf.69dev.id",
+    },
     port: 5173, // atau port lain yang Anda gunakan
   },
 });

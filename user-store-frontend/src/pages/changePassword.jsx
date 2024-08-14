@@ -34,7 +34,7 @@ const ChangePasswordPage = () => {
       <NavbarPage></NavbarPage>
       <div className="container-change">
         <h1>Change Password</h1>
-        <form action="_method=PUT" method="post" onSubmit={handleChange}>
+        <form method="post" onSubmit={handleChange}>
           {logChange === null ? null : (
             <div className="alert alert-success" role="alert">
               {logChange}

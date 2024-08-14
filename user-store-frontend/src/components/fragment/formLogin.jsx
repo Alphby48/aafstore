@@ -48,7 +48,7 @@ const FormLogin = () => {
     });
   };
   return (
-    <form action="" method="post" className="login" onSubmit={handleLogin}>
+    <form className="login" method="post" onSubmit={handleLogin}>
       <InputLabel
         textLabel="Username"
         type="text"

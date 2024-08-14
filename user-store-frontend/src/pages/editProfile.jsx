@@ -64,7 +64,7 @@ const EditProfile = () => {
               })}
           </div>
         )}
-        <form action="_method=PUT" method="post" onSubmit={handleEdit}>
+        <form className method="post" onSubmit={handleEdit}>
           <input type="hidden" name="_id" value={oldName._id} />
           <input type="hidden" name="oldNama" value={oldName.username} />
 

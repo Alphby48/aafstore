@@ -8,11 +8,13 @@ import useValidasi from "../hooks/validasi";
 const SearchPage = () => {
   const { search } = useParams();
   const [products, setProducts] = useState([]);
-  const Local = JSON.parse(localStorage.getItem("token")).id;
+  const Local = JSON.parse(localStorage.getItem("token")) || {
+    id: 1,
+  };
 
   useValidasi();
   useEffect(() => {
-    GetProducts(Local, (res) => {
+    GetProducts(Local.id, (res) => {
       const data = res.filter((p) =>
         p.title.toLowerCase().includes(search.toLowerCase())
       );
