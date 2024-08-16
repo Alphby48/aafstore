@@ -6,8 +6,7 @@ export const AuthRegister = (data, call) => {
       headers: {
         "Content-Type": "application/json",
 
-        "Access-Control-Allow-Origin": "https://serveraaf.69dev.id",
-
+        "Access-Control-Allow-Origin": `${url}`,
       },
     })
     .then((res) => call(res.data))

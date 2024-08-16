@@ -6,8 +6,7 @@ export const AuthLogin = (data, call) => {
     .post(`${uri}/login`, data, {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://serveraaf.69dev.id",
-
+        "Access-Control-Allow-Origin": `${uri}`,
       },
     })
     .then((res) => call(true, res.data))
