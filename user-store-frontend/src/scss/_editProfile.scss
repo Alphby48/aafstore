@@ -1,0 +1,78 @@
+.container-edit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+  h1 {
+    align-items: center;
+    margin: 1rem 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .label-input {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      .edit-label {
+        text-align: left;
+        margin-bottom: 0.3rem;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+      }
+      .edit-control {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #918ffc;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+      }
+    }
+
+    .select-edit {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      .edit-label {
+        text-align: left;
+        margin-bottom: 0.3rem;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+      }
+      .select-inp {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #918ffc;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+      }
+    }
+    .btn-edit {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+      align-items: center;
+      button {
+        cursor: pointer;
+        margin-right: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.container-poto {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .box-poto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .img-poto {
+      width: 20rem;
+      height: 20rem;
+      margin-bottom: 1rem;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    form {
+      margin-top: 2.5rem;
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container-poto {
+    .box-poto {
+      form {
+        width: 100%;
+        input {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
