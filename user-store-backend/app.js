@@ -19,6 +19,7 @@ const methodeOverride = require("method-override");
 // Access Database
 require("./utils/database");
 const cartSchema = require("./model/cart");
+const adminSchema = require("./model/admin");
 // connection
 
 const app = express();
@@ -101,6 +102,41 @@ app.delete("/cart", cartDel);
 // get cart
 
 app.get("/cart/:us", getCart);
+
+// admin login
+
+app.post("/auth-admin", async (req, res) => {
+  const valid = await adminSchema.findOne({
+    username: req.body.username,
+    password: req.body.password,
+  });
+
+  if (valid) {
+    res.status(200);
+    res.send(valid._id);
+    console.log(`--------------------------------`);
+    console.log(`LOGIN ADMIN ${valid.username} ${new Date()}`);
+    console.log(`login berhasil`);
+    console.log(`--------------------------------`);
+  } else {
+    res.status(401).send("login gagal");
+    console.log(`--------------------------------`);
+    console.log(`LOGIN ADMIN GAGAL ${req.body.username} ${new Date()}`);
+    console.log(`login gagal`);
+    console.log(`--------------------------------`);
+  }
+});
+
+// get admin
+
+app.get("/admin/:id", async (req, res) => {
+  try {
+    const admin = await adminSchema.findOne({ _id: req.params.id });
+    res.send(admin._id);
+  } catch (error) {
+    res.send(`Tidak Ada Data`);
+  }
+});
 
 //404
 
