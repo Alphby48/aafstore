@@ -5,6 +5,8 @@ import LoginPage from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import NotFoundPage from "./pages/404";
 import DarkModeContextProvider from "./context/darkContext";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import "./style/style.scss";
 
 const router = createBrowserRouter([
@@ -25,7 +27,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DarkModeContextProvider>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </DarkModeContextProvider>
   </StrictMode>
 );
