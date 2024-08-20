@@ -20,7 +20,7 @@ const MobileChart = () => {
   ];
 
   return (
-    <div className="w-full p-3 flex sm:hidden flex-wrap justify-around gap-4">
+    <div className="w-full p-3 hidden flex-wrap justify-around gap-4">
       <div
         className={`w-full sm:w-1/2 p-2 rounded-lg ${
           isDarkMode ? "bg-slate-400" : "bg-gray-300"

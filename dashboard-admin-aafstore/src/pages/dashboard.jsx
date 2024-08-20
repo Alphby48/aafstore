@@ -11,12 +11,16 @@ import { useEffect } from "react";
 import { GetAdmin } from "../service/admin";
 import LoadingPage from "../components/element/loading";
 import SideBarPage from "../fragments/bar";
+import { GetProducts } from "../service/products";
+import { GetUsers } from "../service/users";
 
 const Dashboard = () => {
   const { isDarkMode } = useContext(DarkMode);
   const dispatch = useDispatch();
   const kont = useSelector((state) => state.sidebar.side);
   const [kondisi, setKondisi] = useState(false);
+  const [lengthProd, setLengthProd] = useState(0);
+  const [lengthUser, setLengthUser] = useState(0);
 
   useEffect(() => {
     const local = localStorage.getItem("hash");
@@ -33,6 +37,14 @@ const Dashboard = () => {
         } else {
           window.location.href = "/login";
         }
+      });
+
+      GetProducts(local, (res) => {
+        setLengthProd(res.length);
+      });
+
+      GetUsers(local, (res) => {
+        setLengthUser(res.length);
       });
     }
   }, []);
@@ -95,12 +107,12 @@ const Dashboard = () => {
               >
                 <div className=" w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
                   <i className="fa-solid fa-cart-arrow-down text-2xl text-emerald-700"></i>
-                  <h1 className="text-3xl font-poppins">20</h1>
+                  <h1 className="text-3xl font-poppins">{lengthProd}</h1>
                   <p className="text-lg">Products</p>
                 </div>
                 <div className="w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
                   <i className="fa-solid fa-users text-2xl text-emerald-700"></i>
-                  <h1 className="text-3xl font-poppins">20</h1>
+                  <h1 className="text-3xl font-poppins">{lengthUser}</h1>
                   <p className="text-lg">Total Client</p>
                 </div>
                 <div className="w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
@@ -110,7 +122,6 @@ const Dashboard = () => {
                 </div>
               </div>
               <DesktopChart></DesktopChart>
-              <MobileChart></MobileChart>
             </div>
           </div>
         </div>

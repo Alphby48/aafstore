@@ -3,13 +3,16 @@ const { Uploaded } = require("./controllers/upoadImage.js");
 const { deleteAccount } = require("./controllers/deleteAccount.js");
 const { register } = require("./controllers/registrasiAccount.js");
 const { login } = require("./controllers/loginAccount.js");
+const { loginAdmin } = require("./controllers/loginAdmin.js");
 const { getProducts } = require("./controllers/getProducts.js");
+const { getProductsAdmin } = require("./controllers/getProductsAdmin.js");
 const { getProfile } = require("./controllers/getProfile.js");
 const { putProfile } = require("./controllers/putProfile.js");
 const { changePassword } = require("./controllers/changePassword.js");
 const { cartUp } = require("./controllers/cartUp.js");
 const { cartDel } = require("./controllers/cartDel.js");
 const { getCart } = require("./controllers/getCart.js");
+const { getAdmin } = require("./controllers/getAdmin.js");
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -19,16 +22,14 @@ const methodeOverride = require("method-override");
 // Access Database
 require("./utils/database");
 const cartSchema = require("./model/cart");
+const aafSchema = require("./model/aaf");
 const adminSchema = require("./model/admin");
+const productsSchema = require("./model/products");
 // connection
 
 const app = express();
 const port = 3000;
-app.use(
-  cors({
-    origin: ["http://192.168.1.80:5173", "http://192.168.1.80:3000"],
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 // Setup method override
@@ -105,36 +106,29 @@ app.get("/cart/:us", getCart);
 
 // admin login
 
-app.post("/auth-admin", async (req, res) => {
-  const valid = await adminSchema.findOne({
-    username: req.body.username,
-    password: req.body.password,
-  });
-
-  if (valid) {
-    res.status(200);
-    res.send(valid._id);
-    console.log(`--------------------------------`);
-    console.log(`LOGIN ADMIN ${valid.username} ${new Date()}`);
-    console.log(`login berhasil`);
-    console.log(`--------------------------------`);
-  } else {
-    res.status(401).send("login gagal");
-    console.log(`--------------------------------`);
-    console.log(`LOGIN ADMIN GAGAL ${req.body.username} ${new Date()}`);
-    console.log(`login gagal`);
-    console.log(`--------------------------------`);
-  }
-});
+app.post("/auth-admin", loginAdmin);
 
 // get admin
 
-app.get("/admin/:id", async (req, res) => {
+app.get("/admin/:id", getAdmin);
+
+// get products for admin
+
+app.get("/admin/products/:id", getProductsAdmin);
+
+// get users for admin
+
+app.get("/admin/users/:id", async (req, res) => {
   try {
-    const admin = await adminSchema.findOne({ _id: req.params.id });
-    res.send(admin._id);
+    const valid = await adminSchema.findOne({ _id: req.params.id });
+    if (valid) {
+      const users = await aafSchema.find();
+      res.send(users);
+    } else {
+      res.send("data tidak ditemukan");
+    }
   } catch (error) {
-    res.send(`Tidak Ada Data`);
+    res.send("data tidak ditemukan");
   }
 });
 

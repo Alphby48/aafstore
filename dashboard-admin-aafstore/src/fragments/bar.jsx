@@ -42,44 +42,48 @@ const SideBarPage = () => {
         >
           <h2 className="text-2xl font-poppins">AAF Store</h2>
         </MenuItem>
-        <MenuItem
-          className={`my-3 rounded-lg ${
-            isDarkMode ? "bg-slate-600" : "bg-red-100"
-          }`}
-          icon={
-            <i
-              className={`fa-solid fa-gauge ${isDarkMode && "text-white"}`}
-            ></i>
-          }
-        >
-          <h1
-            className={`font-poppins ${
-              isDarkMode ? "text-white" : "text-slate-800"
+        <Link to={"/"}>
+          <MenuItem
+            className={`my-3 rounded-lg ${
+              isDarkMode ? "bg-slate-600" : "bg-red-100"
             }`}
+            icon={
+              <i
+                className={`fa-solid fa-gauge ${isDarkMode && "text-white"}`}
+              ></i>
+            }
           >
-            Dashboard
-          </h1>
-        </MenuItem>
-        <MenuItem
-          className={`my-3 rounded-lg ${
-            isDarkMode ? "bg-slate-600" : "bg-red-100"
-          }`}
-          icon={
-            <i
-              className={`fa-solid fa-cart-shopping ${
-                isDarkMode && "text-white"
+            <h1
+              className={`font-poppins ${
+                isDarkMode ? "text-white" : "text-slate-800"
               }`}
-            ></i>
-          }
-        >
-          <h1
-            className={`font-poppins ${
-              isDarkMode ? "text-white" : "text-slate-800"
+            >
+              Dashboard
+            </h1>
+          </MenuItem>
+        </Link>
+        <Link to={"/add-product"}>
+          <MenuItem
+            className={`my-3 rounded-lg ${
+              isDarkMode ? "bg-slate-600" : "bg-red-100"
             }`}
+            icon={
+              <i
+                className={`fa-solid fa-cart-shopping ${
+                  isDarkMode && "text-white"
+                }`}
+              ></i>
+            }
           >
-            Add Products
-          </h1>
-        </MenuItem>
+            <h1
+              className={`font-poppins ${
+                isDarkMode ? "text-white" : "text-slate-800"
+              }`}
+            >
+              Add Products
+            </h1>
+          </MenuItem>
+        </Link>
         <MenuItem
           className={`my-3 rounded-lg ${
             isDarkMode ? "bg-slate-600" : "bg-red-100"

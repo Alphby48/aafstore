@@ -8,6 +8,7 @@ import DarkModeContextProvider from "./context/darkContext";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./style/style.scss";
+import AddProductPage from "./pages/addProduct";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage></LoginPage>,
+  },
+  {
+    path: "/add-product",
+    element: <AddProductPage></AddProductPage>,
   },
   {
     path: "*",
