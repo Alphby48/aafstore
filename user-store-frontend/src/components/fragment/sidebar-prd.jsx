@@ -27,7 +27,7 @@ const SidebarProduct = () => {
             </Link>
           </li>
           <li>
-            <Link className="link-side">
+            <Link to={"/product/category/lain-lain"} className="link-side">
               <img src="./icons/accesories.svg" alt="" />
             </Link>
           </li>

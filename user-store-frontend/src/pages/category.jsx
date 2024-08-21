@@ -32,7 +32,7 @@ const Category = () => {
               return (
                 <CardElement
                   _id={p._id}
-                  image={p.image}
+                  image={`${import.meta.env.VITE_API_URL}/produkImg/${p.image}`}
                   title={p.title}
                   price={p.price}
                 />

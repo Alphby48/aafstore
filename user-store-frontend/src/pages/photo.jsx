@@ -55,11 +55,7 @@ const PhotoPage = () => {
             <p>Preview:</p>
             <img src={changePp} alt="profile" />
           </div>
-          <form
-            action={`${import.meta.env.VITE_API_URL}/upload?_method=PUT`}
-            method="post"
-            onSubmit={handleUpload}
-          >
+          <form method="post" onSubmit={handleUpload}>
             <input type="hidden" name="id" value={profile._id} id="id" />
             <input
               type="hidden"

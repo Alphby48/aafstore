@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import NavbarPage from "../components/fragment/navbar";
 import { GetProducts } from "../service/products";
-import { statusCart } from "../redux/slices/cartSlices";
+import { removeItem, statusCart } from "../redux/slices/cartSlices";
 import useValidasi from "../hooks/validasi";
 import { getCart } from "../service/getCart";
 import { RemoveCart } from "../service/removeCart";
@@ -12,6 +12,7 @@ import Loading from "../components/layouts/loading";
 const CartPage = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [total, setTotal] = useState(0);
+  const [pilah, setPilah] = useState([]);
   const stscart = useSelector((state) => state.cart.data);
   const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
@@ -33,11 +34,25 @@ const CartPage = () => {
       getCart(local.id, (res) => {
         if (res.length > 0) {
           const data = res.find((d) => d.org === local.id);
+
           setCart(data.idCart);
         }
       });
     }
   }, [stscart]);
+
+  useEffect(() => {
+    const unmatchedItems = cart.filter(
+      (p) => !cartProduct.some((c) => c._id === p.idP)
+    );
+
+    console.log(unmatchedItems);
+    setPilah(unmatchedItems);
+  }, [cart, cartProduct]);
+
+  const handlePilah = () => {
+    console.log(pilah);
+  };
 
   useEffect(() => {
     if (cart.length > 0 && cartProduct.length > 0) {
@@ -72,6 +87,14 @@ const CartPage = () => {
           <h1>
             Shopping Cart <i className="bi bi-cart4"></i>
           </h1>
+          {pilah.length > 0 && (
+            <div className="alert alert-danger" role="alert">
+              Some products are not in stock
+              <button className="btn btn-danger" onClick={handlePilah}>
+                <i className="bi bi-trash"></i>
+              </button>
+            </div>
+          )}
           <div className="box-cart">
             {cartProduct.length > 0 &&
               cart.map((c) => {
@@ -83,7 +106,12 @@ const CartPage = () => {
                   <div className="item-cart" key={c._id}>
                     <Link to={`/product/detail/${product._id}`}>
                       <div className="img-item">
-                        <img src={product.image} alt="" />
+                        <img
+                          src={`${import.meta.env.VITE_API_URL}/produkImg/${
+                            product.image
+                          }`}
+                          alt=""
+                        />
                       </div>
                     </Link>
                     <div className="text-item">

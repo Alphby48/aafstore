@@ -59,7 +59,12 @@ const DetaiPage = () => {
         {
           <div className="box-detail">
             <div className="detail-img">
-              <img src={productDetail.image} alt="" />
+              <img
+                src={`${import.meta.env.VITE_API_URL}/produkImg/${
+                  productDetail.image
+                }`}
+                alt=""
+              />
             </div>
             <div className="detail-body">
               <h1>{productDetail.title}</h1>

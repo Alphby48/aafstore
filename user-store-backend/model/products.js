@@ -24,6 +24,10 @@ const productsSchema = mongoose.model("products", {
   for: {
     type: String,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = productsSchema;

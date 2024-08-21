@@ -26,7 +26,17 @@ const SideBarPage = () => {
       toggled={kont}
       breakPoint="md"
     >
-      <Menu className="p-1 sticky top-0">
+      <Menu
+        className="p-1 sticky top-0"
+        menuItemStyles={{
+          button: {
+            "&:hover": {
+              backgroundColor: "inherit", // Menghilangkan background putih saat hover
+              color: "inherit", // Menghilangkan perubahan warna teks saat hover
+            },
+          },
+        }}
+      >
         <i
           className="sm:hidden fa-regular fa-circle-xmark text-3xl text-slate-500 absolute top-2 right-5 z-50"
           onClick={handlingSidebar}
@@ -38,12 +48,15 @@ const SideBarPage = () => {
               onClick={handleCollaps}
             ></i>
           }
-          className="menu1 mb-10"
-        >
-          <h2 className="text-2xl font-poppins">AAF Store</h2>
+        ></MenuItem>
+        <MenuItem className="menu1 mb-10">
+          <div className="w-full flex justify-center items-center">
+            <img src="/img/logo.png" className="w-24" alt="" />
+          </div>
         </MenuItem>
         <Link to={"/"}>
           <MenuItem
+            onClick={handlingSidebar}
             className={`my-3 rounded-lg ${
               isDarkMode ? "bg-slate-600" : "bg-red-100"
             }`}
@@ -64,6 +77,7 @@ const SideBarPage = () => {
         </Link>
         <Link to={"/add-product"}>
           <MenuItem
+            onClick={handlingSidebar}
             className={`my-3 rounded-lg ${
               isDarkMode ? "bg-slate-600" : "bg-red-100"
             }`}

@@ -13,6 +13,8 @@ const { cartUp } = require("./controllers/cartUp.js");
 const { cartDel } = require("./controllers/cartDel.js");
 const { getCart } = require("./controllers/getCart.js");
 const { getAdmin } = require("./controllers/getAdmin.js");
+const { getUsersAdmin } = require("./controllers/getUsersAdmin.js");
+const { addProductAdmin } = require("./controllers/addProductAdmin.js");
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -118,19 +120,11 @@ app.get("/admin/products/:id", getProductsAdmin);
 
 // get users for admin
 
-app.get("/admin/users/:id", async (req, res) => {
-  try {
-    const valid = await adminSchema.findOne({ _id: req.params.id });
-    if (valid) {
-      const users = await aafSchema.find();
-      res.send(users);
-    } else {
-      res.send("data tidak ditemukan");
-    }
-  } catch (error) {
-    res.send("data tidak ditemukan");
-  }
-});
+app.get("/admin/users/:id", getUsersAdmin);
+
+// addProductAdmin
+
+app.post("/admin/add-product", addProductAdmin);
 
 //404
 
