@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./style/style.scss";
 import AddProductPage from "./pages/addProduct";
+import ProductsControlPage from "./pages/productControl";
+import DetailProductPage from "./pages/detailProduct";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
   {
     path: "/add-product",
     element: <AddProductPage></AddProductPage>,
+  },
+  {
+    path: "/products-control",
+    element: <ProductsControlPage></ProductsControlPage>,
+  },
+  {
+    path: "/products-control/detail/:id",
+    element: <DetailProductPage></DetailProductPage>,
   },
   {
     path: "*",

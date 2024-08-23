@@ -133,17 +133,17 @@ const Dashboard = () => {
             isDarkMode ? "bg-gray-500" : "bg-slate-200"
           } rounded-lg`}
         >
-          <div className=" w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
+          <div className=" w-32 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
             <i className="fa-solid fa-cart-arrow-down text-2xl text-emerald-700"></i>
             <h1 className="text-3xl font-poppins">{lengthProd}</h1>
             <p className="text-lg">Products</p>
           </div>
-          <div className="w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
+          <div className="w-32 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
             <i className="fa-solid fa-users text-2xl text-emerald-700"></i>
             <h1 className="text-3xl font-poppins">{lengthUser}</h1>
             <p className="text-lg">Total Client</p>
           </div>
-          <div className="w-36 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
+          <div className="w-32 mb-2 sm:w-1/5 bg-violet-300 p-4 flex flex-col items-center rounded-lg">
             <i className="fa-solid fa-hand-holding-dollar text-2xl text-emerald-700"></i>
             <h1 className="text-3xl font-poppins">20</h1>
             <p className="text-lg">Sold</p>

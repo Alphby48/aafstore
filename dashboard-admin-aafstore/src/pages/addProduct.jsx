@@ -45,6 +45,8 @@ const AddProductPage = () => {
     PostProduct(data, (res) => {
       console.log(res);
       setPopUp(true);
+      e.target.reset();
+      setChangePp("https://fakeimg.pl/160x240/");
     });
   };
 
@@ -162,7 +164,7 @@ const AddProductPage = () => {
             </button>
           </form>
           {popUp === true ? (
-            <PopUp setPopUp={setPopUp}></PopUp>
+            <PopUp setPopUp={setPopUp} title="Product Added"></PopUp>
           ) : (
             <h1 className="hidden"></h1>
           )}

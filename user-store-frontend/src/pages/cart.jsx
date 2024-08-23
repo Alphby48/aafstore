@@ -8,6 +8,8 @@ import useValidasi from "../hooks/validasi";
 import { getCart } from "../service/getCart";
 import { RemoveCart } from "../service/removeCart";
 import Loading from "../components/layouts/loading";
+import { RemoveMany } from "../service/removeMany";
+import { PostProfile } from "../service/profile";
 //
 const CartPage = () => {
   const [cartProduct, setCartProduct] = useState([]);
@@ -15,6 +17,7 @@ const CartPage = () => {
   const [pilah, setPilah] = useState([]);
   const stscart = useSelector((state) => state.cart.data);
   const [cart, setCart] = useState([]);
+  const [info, setInfo] = useState(false);
   const dispatch = useDispatch();
   //
   useValidasi();
@@ -22,6 +25,15 @@ const CartPage = () => {
   //   const local = JSON.parse(localStorage.getItem("token"));
 
   // }, []);
+
+  useEffect(() => {
+    const local = JSON.parse(localStorage.getItem("token"));
+    if (local) {
+      PostProfile(local.id, (res) => {
+        setInfo(true);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("token"));
@@ -52,6 +64,10 @@ const CartPage = () => {
 
   const handlePilah = () => {
     console.log(pilah);
+    RemoveMany(pilah, JSON.parse(localStorage.getItem("token")).id, (res) => {
+      console.log(res);
+      dispatch(statusCart(res));
+    });
   };
 
   useEffect(() => {
@@ -79,7 +95,7 @@ const CartPage = () => {
     });
   };
 
-  if (cartProduct.length > 0) {
+  if (info === true) {
     return (
       <>
         <NavbarPage></NavbarPage>

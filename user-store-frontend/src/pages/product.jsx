@@ -8,11 +8,23 @@ import useValidasi from "../hooks/validasi";
 import FootBarLayout from "../components/layouts/footbar";
 import ErrorPage from "./404";
 import Loading from "../components/layouts/loading";
+import { PostProfile } from "../service/profile";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [info, setInfo] = useState(false);
 
   useValidasi();
+
+  useEffect(() => {
+    const local = JSON.parse(localStorage.getItem("token"));
+    if (local) {
+      PostProfile(local.id, (res) => {
+        console.log(res);
+        setInfo(true);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("token"));
@@ -31,7 +43,7 @@ const ProductPage = () => {
     window.location.href = `/search/${e.target.search.value}`;
   };
 
-  if (products.length > 0) {
+  if (info === true) {
     return (
       <div className="container-box">
         <NavbarPage></NavbarPage>
@@ -53,7 +65,7 @@ const ProductPage = () => {
               </button>
             </form>
             <div className="all-product">
-              {products.length > 0 &&
+              {products.length > 0 ? (
                 products.map((p) => {
                   return (
                     <CardElement
@@ -66,7 +78,10 @@ const ProductPage = () => {
                       price={p.price}
                     />
                   );
-                })}
+                })
+              ) : (
+                <p>Product Kosong</p>
+              )}
             </div>
           </div>
         </div>

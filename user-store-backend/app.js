@@ -1,6 +1,7 @@
 const express = require("express");
 const { Uploaded } = require("./controllers/upoadImage.js");
 const { deleteAccount } = require("./controllers/deleteAccount.js");
+const { deleteProduct } = require("./controllers/deleteProduct.js");
 const { register } = require("./controllers/registrasiAccount.js");
 const { login } = require("./controllers/loginAccount.js");
 const { loginAdmin } = require("./controllers/loginAdmin.js");
@@ -11,6 +12,7 @@ const { putProfile } = require("./controllers/putProfile.js");
 const { changePassword } = require("./controllers/changePassword.js");
 const { cartUp } = require("./controllers/cartUp.js");
 const { cartDel } = require("./controllers/cartDel.js");
+const { CartDelMany } = require("./controllers/cartDelMany.js");
 const { getCart } = require("./controllers/getCart.js");
 const { getAdmin } = require("./controllers/getAdmin.js");
 const { getUsersAdmin } = require("./controllers/getUsersAdmin.js");
@@ -102,6 +104,10 @@ app.put("/cart", cartUp);
 
 app.delete("/cart", cartDel);
 
+// delete cart Many
+
+app.delete("/cart-trash/:id", CartDelMany);
+
 // get cart
 
 app.get("/cart/:us", getCart);
@@ -125,6 +131,10 @@ app.get("/admin/users/:id", getUsersAdmin);
 // addProductAdmin
 
 app.post("/admin/add-product", addProductAdmin);
+
+// delete Product
+
+app.delete("/admin/delete-product", deleteProduct);
 
 //404
 

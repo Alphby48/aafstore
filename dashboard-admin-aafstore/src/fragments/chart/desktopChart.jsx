@@ -31,7 +31,7 @@ const DesktopChart = () => {
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setWidthChart(300);
+      setWidthChart(275);
       setHeightChart(200);
     } else {
       setWidthChart(400);

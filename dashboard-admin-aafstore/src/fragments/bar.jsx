@@ -98,6 +98,29 @@ const SideBarPage = () => {
             </h1>
           </MenuItem>
         </Link>
+        <Link to={"/products-control"}>
+          <MenuItem
+            onClick={handlingSidebar}
+            className={`my-3 rounded-lg ${
+              isDarkMode ? "bg-slate-600" : "bg-red-100"
+            }`}
+            icon={
+              <i
+                className={`fa-brands fa-product-hunt ${
+                  isDarkMode && "text-white"
+                }`}
+              ></i>
+            }
+          >
+            <h1
+              className={`font-poppins ${
+                isDarkMode ? "text-white" : "text-slate-800"
+              }`}
+            >
+              Products Control
+            </h1>
+          </MenuItem>
+        </Link>
         <MenuItem
           className={`my-3 rounded-lg ${
             isDarkMode ? "bg-slate-600" : "bg-red-100"

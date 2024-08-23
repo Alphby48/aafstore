@@ -14,7 +14,7 @@ const DashLayout = (props) => {
     dispatch(sideAct(!kont));
   };
   return (
-    <div className="flex w-full">
+    <div className="flex w-full min-h-screen">
       <SideBarPage></SideBarPage>
 
       <div className={`w-full p-3 ${isDarkMode && "bg-slate-700"}`}>

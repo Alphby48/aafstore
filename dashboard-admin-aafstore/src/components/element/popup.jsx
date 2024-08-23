@@ -1,5 +1,5 @@
 const PopUp = (props) => {
-  const { setPopUp } = props;
+  const { setPopUp, title } = props;
   return (
     <div
       className={`fixed top-0 left-0 right-0 bottom-0 w-full h-full flex justify-center items-center`}
@@ -11,9 +11,7 @@ const PopUp = (props) => {
           className={`fa-regular fa-circle-xmark absolute top-2 right-2 text-2xl text-white hover:text-red-500 cursor-pointer`}
           onClick={() => setPopUp(false)}
         ></i>
-        <p className={`font-poppins text-lg sm:text-xl text-white`}>
-          Product Telah Ditambahkan
-        </p>
+        <p className={`font-poppins text-lg sm:text-xl text-white`}>{title}</p>
       </div>
     </div>
   );
