@@ -51,7 +51,7 @@ const DetailProductPage = () => {
               alt=""
             />
           </div>
-          <div className="flex justify-center flex-col">
+          <div className="flex justify-center flex-col sm:w-1/2">
             <h1
               className={`font-poppins text-3xl my-2 capitalize ${
                 isDarkMode && "text-white"

@@ -11,6 +11,7 @@ import "./style/style.scss";
 import AddProductPage from "./pages/addProduct";
 import ProductsControlPage from "./pages/productControl";
 import DetailProductPage from "./pages/detailProduct";
+import UserControlPage from "./pages/userControl";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/products-control",
     element: <ProductsControlPage></ProductsControlPage>,
+  },
+  {
+    path: "/users-control",
+    element: <UserControlPage></UserControlPage>,
   },
   {
     path: "/products-control/detail/:id",

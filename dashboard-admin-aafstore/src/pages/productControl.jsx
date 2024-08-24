@@ -37,7 +37,7 @@ const ProductsControlPage = () => {
         }
       });
     }
-  });
+  }, []);
 
   useEffect(() => {
     const local = localStorage.getItem("hash");

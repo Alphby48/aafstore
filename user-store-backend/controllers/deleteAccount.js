@@ -10,7 +10,7 @@ const deleteAccount = async (req, res) => {
       aafSchema
         .deleteOne({ _id: req.body._id })
         .then((result) => {
-          res.send(`data telah dihapus ${valid.username}`);
+          // res.send(`data telah dihapus ${valid.username}`);
           console.log(`--------------------------------`);
           console.log(`HAPUS DATA USER ${valid.username} ${new Date()}`);
           console.log(`--------------------------------`);
@@ -35,6 +35,7 @@ const deleteAccount = async (req, res) => {
       if (fs.existsSync(filepath)) {
         return fs.unlinkSync(filepath);
       }
+      res.send(true);
     }
   } catch (error) {
     console.log(error);

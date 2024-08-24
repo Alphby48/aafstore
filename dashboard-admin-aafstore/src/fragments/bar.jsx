@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sideAct } from "../redux/slices/sidebarSlices";
+import ConfirmPage from "../components/element/confirm";
 const SideBarPage = () => {
   const { isDarkMode } = useContext(DarkMode);
   const kont = useSelector((state) => state.sidebar.side);
   const dispatch = useDispatch();
   const [isSideBar, setIsSideBar] = useState(false);
+  const [confirm, setConfirm] = useState(false);
 
   const handlingSidebar = () => {
     dispatch(sideAct(!kont));
@@ -17,6 +19,11 @@ const SideBarPage = () => {
 
   const handleCollaps = () => {
     setIsSideBar(!isSideBar);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("hash");
+    window.location.href = "/login";
   };
 
   return (
@@ -121,13 +128,60 @@ const SideBarPage = () => {
             </h1>
           </MenuItem>
         </Link>
+        <Link to={"/users-control"}>
+          <MenuItem
+            onClick={handlingSidebar}
+            className={`my-3 rounded-lg ${
+              isDarkMode ? "bg-slate-600" : "bg-red-100"
+            }`}
+            icon={
+              <i
+                className={`fa-solid fa-users ${isDarkMode && "text-white"}`}
+              ></i>
+            }
+          >
+            <h1
+              className={`font-poppins ${
+                isDarkMode ? "text-white" : "text-slate-800"
+              }`}
+            >
+              Users Control
+            </h1>
+          </MenuItem>
+        </Link>
+        <Link to={"/users-control"}>
+          <MenuItem
+            onClick={handlingSidebar}
+            className={`my-3 rounded-lg ${
+              isDarkMode ? "bg-slate-600" : "bg-red-100"
+            }`}
+            icon={
+              <i
+                className={`fa-solid fa-user-shield ${
+                  isDarkMode && "text-white"
+                }`}
+              ></i>
+            }
+          >
+            <h1
+              className={`font-poppins ${
+                isDarkMode ? "text-white" : "text-slate-800"
+              }`}
+            >
+              Setting Account
+            </h1>
+          </MenuItem>
+        </Link>
         <MenuItem
+          onClick={() => setConfirm(true)}
           className={`my-3 rounded-lg ${
             isDarkMode ? "bg-slate-600" : "bg-red-100"
           }`}
           icon={
             <i
-              className={`fa-solid fa-users ${isDarkMode && "text-white"}`}
+              className={`fa-solid fa-right-from-bracket ${
+                isDarkMode && "text-white"
+              }`}
             ></i>
           }
         >
@@ -136,12 +190,21 @@ const SideBarPage = () => {
               isDarkMode ? "text-white" : "text-slate-800"
             }`}
           >
-            Users Control
+            Log-Out
           </h1>
         </MenuItem>
       </Menu>
+      {confirm === true && (
+        <ConfirmPage
+          onClick={handleLogout}
+          setConfirm={setConfirm}
+          title="apakah yakin ingin keluar?"
+        ></ConfirmPage>
+      )}
     </Sidebar>
   );
 };
 
 export default SideBarPage;
+
+<i class="fa-solid fa-user-shield"></i>;
