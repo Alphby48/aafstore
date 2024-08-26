@@ -12,6 +12,10 @@ import AddProductPage from "./pages/addProduct";
 import ProductsControlPage from "./pages/productControl";
 import DetailProductPage from "./pages/detailProduct";
 import UserControlPage from "./pages/userControl";
+import SettingAccountPage from "./pages/settingAccount";
+import ChangeUsernamePage from "./pages/changeUsername";
+import ChangePasswordPage from "./pages/chanePassword";
+import DetailUserPage from "./pages/detailUser";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +39,24 @@ const router = createBrowserRouter([
     element: <UserControlPage></UserControlPage>,
   },
   {
+    path: "/users-control/detail/:id",
+    element: <DetailUserPage></DetailUserPage>,
+  },
+  {
     path: "/products-control/detail/:id",
     element: <DetailProductPage></DetailProductPage>,
+  },
+  {
+    path: "/setting-account",
+    element: <SettingAccountPage></SettingAccountPage>,
+  },
+  {
+    path: "/setting-account/change-username",
+    element: <ChangeUsernamePage></ChangeUsernamePage>,
+  },
+  {
+    path: "/setting-account/change-password",
+    element: <ChangePasswordPage></ChangePasswordPage>,
   },
   {
     path: "*",

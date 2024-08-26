@@ -9,6 +9,9 @@ const adminSchema = mongoose.model("admin", {
     type: String,
     required: true,
   },
+  hash: {
+    type: String,
+  },
 });
 
 module.exports = adminSchema;

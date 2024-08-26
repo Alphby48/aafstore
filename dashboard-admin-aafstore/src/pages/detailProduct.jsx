@@ -6,9 +6,12 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../components/element/loading";
 import DashLayout from "../components/layouts/dashLayout";
+import NotFoundPage from "./404";
 const DetailProductPage = () => {
   const { id } = useParams();
+  const [isOk, setIsOk] = useState(false);
   const [mount, setMount] = useState(false);
+  const [info, setInfo] = useState(false);
   const [products, setProducts] = useState([]);
   const { isDarkMode } = useContext(DarkMode);
 
@@ -20,13 +23,28 @@ const DetailProductPage = () => {
     }
 
     if (local) {
-      GetProducts(local, (res) => {
-        const data = res.find((item) => item._id === id);
-        setProducts(data);
-        setMount(true);
+      GetAdmin(local, (res) => {
+        if (res === local) {
+          setIsOk(true);
+        } else {
+          window.location.href = "/login";
+        }
       });
     }
   }, [id]);
+
+  useEffect(() => {
+    const local = localStorage.getItem("hash");
+    GetProducts(local, (res) => {
+      const data = res.find((item) => item._id === id);
+      if (data) {
+        setProducts(data);
+        setMount(true);
+      } else {
+        setInfo(true);
+      }
+    });
+  }, [isOk]);
 
   console.log(products);
 
@@ -87,6 +105,8 @@ const DetailProductPage = () => {
         </div>
       </DashLayout>
     );
+  } else if (info === true) {
+    return <NotFoundPage></NotFoundPage>;
   } else {
     return <LoadingPage></LoadingPage>;
   }

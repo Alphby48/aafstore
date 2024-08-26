@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const deleteProduct = async (req, res) => {
   try {
-    const valid = await adminSchema.findOne({ _id: req.body.idAdmin });
+    const valid = await adminSchema.findOne({ hash: req.body.idAdmin });
 
     if (valid) {
       const deleteProduct = await productsSchema

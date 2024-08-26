@@ -10,6 +10,8 @@ const { getProductsAdmin } = require("./controllers/getProductsAdmin.js");
 const { getProfile } = require("./controllers/getProfile.js");
 const { putProfile } = require("./controllers/putProfile.js");
 const { changePassword } = require("./controllers/changePassword.js");
+const { changePasswordAdmin } = require("./controllers/changePasswordAdmin.js");
+const { changeUsernameAdmin } = require("./controllers/changeUsernameAdmin.js");
 const { cartUp } = require("./controllers/cartUp.js");
 const { cartDel } = require("./controllers/cartDel.js");
 const { CartDelMany } = require("./controllers/cartDelMany.js");
@@ -115,6 +117,14 @@ app.get("/cart/:us", getCart);
 // admin login
 
 app.post("/auth-admin", loginAdmin);
+
+// admin change password
+
+app.put("/change-password-admin", changePasswordAdmin);
+
+// admin change username
+
+app.put("/change-username-admin", changeUsernameAdmin);
 
 // get admin
 

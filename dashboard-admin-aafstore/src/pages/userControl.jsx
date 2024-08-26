@@ -89,7 +89,7 @@ const UserControlPage = () => {
                             }`
                           : "/img/profile.svg"
                       }
-                      className="w-16 h-16 sm:w-24 sm:h-24 rounded-full"
+                      className="w-16 h-16 sm:w-24 object-cover sm:h-24 rounded-full"
                       alt={u.username}
                     />
                   </div>
@@ -109,7 +109,12 @@ const UserControlPage = () => {
                       {u.name}
                     </p>
                     <div className="flex w-full justify-around mt-4">
-                      <button className="bg-blue-300 p-1 rounded-md font-poppins text-white text-sm">
+                      <button
+                        className="bg-blue-300 p-1 rounded-md font-poppins text-white text-sm"
+                        onClick={() =>
+                          (window.location.href = `/users-control/detail/${u._id}`)
+                        }
+                      >
                         Detail
                       </button>
                       <button

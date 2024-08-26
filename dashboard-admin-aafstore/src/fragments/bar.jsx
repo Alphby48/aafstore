@@ -149,7 +149,7 @@ const SideBarPage = () => {
             </h1>
           </MenuItem>
         </Link>
-        <Link to={"/users-control"}>
+        <Link to={"/setting-account"}>
           <MenuItem
             onClick={handlingSidebar}
             className={`my-3 rounded-lg ${
