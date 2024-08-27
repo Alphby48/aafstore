@@ -12,8 +12,8 @@ const DesktopChart = () => {
   const [userSep, setUserSep] = useState(0);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
-    GetUsers(local, (res) => {
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
+    GetUsers(local.hash, (res) => {
       const dataSet = res.filter((r) => r.date.includes("Aug"));
       const dataSet1 = res.filter((r) => r.date.includes("Sep"));
       setUserAug(dataSet.length);

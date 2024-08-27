@@ -17,8 +17,9 @@ const loginAdmin = async (req, res) => {
     const compare = await bcrypt.compare(req.body.password, valid.password);
 
     if (compare) {
+      const sendLog = { hash: valid.hash };
       res.status(200);
-      res.send(valid.hash);
+      res.send(sendLog);
       console.log(`--------------------------------`);
       console.log(`LOGIN ADMIN ${valid.username} ${new Date()}`);
       console.log(`login berhasil`);

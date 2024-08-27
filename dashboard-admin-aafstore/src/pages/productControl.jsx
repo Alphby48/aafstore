@@ -21,15 +21,16 @@ const ProductsControlPage = () => {
   const [popUp, setPopUp] = useState(false);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataset = res.find((item) => item.hash === local.hash);
+        if (dataset) {
           console.log(true);
           setInfo(true);
         } else {
@@ -40,9 +41,9 @@ const ProductsControlPage = () => {
   }, []);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (local) {
-      GetProducts(local, (res) => {
+      GetProducts(local.hash, (res) => {
         setProducts(res);
       });
     }
@@ -58,7 +59,7 @@ const ProductsControlPage = () => {
 
   const handleRemove = (id, imageUrl) => {
     const data = {
-      idAdmin: localStorage.getItem("hash"),
+      idAdmin: JSON.parse(localStorage.getItem("hash")).hash,
       _id: id,
       imageUrl: imageUrl,
     };

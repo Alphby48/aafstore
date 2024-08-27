@@ -4,6 +4,7 @@ import { GetProducts } from "../service/products";
 import { DarkMode } from "../context/darkContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoadingPage from "../components/element/loading";
 import DashLayout from "../components/layouts/dashLayout";
 import NotFoundPage from "./404";
@@ -16,15 +17,16 @@ const DetailProductPage = () => {
   const { isDarkMode } = useContext(DarkMode);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataset = res.find((item) => item.hash === local.hash);
+        if (dataset) {
           setIsOk(true);
         } else {
           window.location.href = "/login";
@@ -34,8 +36,8 @@ const DetailProductPage = () => {
   }, [id]);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
-    GetProducts(local, (res) => {
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
+    GetProducts(local.hash, (res) => {
       const data = res.find((item) => item._id === id);
       if (data) {
         setProducts(data);
@@ -51,12 +53,11 @@ const DetailProductPage = () => {
   if (mount === true) {
     return (
       <DashLayout>
-        <div
-          className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer"
-          onClick={() => window.history.back()}
-        >
-          <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
-        </div>
+        <Link to={`/products-control`}>
+          <div className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer">
+            <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
+          </div>
+        </Link>
         <div
           className={`w-full p-3 mb-3 flex flex-col sm:flex-row justify-around items-center`}
         >

@@ -20,15 +20,16 @@ const UserControlPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataSet = res.find((item) => item.hash === local.hash);
+        if (dataSet) {
           setInfo(true);
         } else {
           window.location.href = "/login";
@@ -38,9 +39,9 @@ const UserControlPage = () => {
   }, []);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (local) {
-      GetUsers(local, (res) => {
+      GetUsers(local.hash, (res) => {
         setUsers(res);
       });
     }

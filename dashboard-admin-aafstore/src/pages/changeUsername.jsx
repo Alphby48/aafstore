@@ -6,6 +6,7 @@ import { GetAdmin } from "../service/admin";
 import { useEffect, useState } from "react";
 import PopUp from "../components/element/popup";
 import LoadingPage from "../components/element/loading";
+import { Link } from "react-router-dom";
 
 const ChangeUsernamePage = () => {
   const { isDarkMode } = useContext(DarkMode);
@@ -14,15 +15,16 @@ const ChangeUsernamePage = () => {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataset = res.find((item) => item.hash === local.hash);
+        if (dataset) {
           console.log(true);
           setInfo(true);
         } else {
@@ -35,13 +37,13 @@ const ChangeUsernamePage = () => {
   const handleChangeUsername = (e) => {
     e.preventDefault();
     const data = {
-      hash: localStorage.getItem("hash"),
+      hash: JSON.parse(localStorage.getItem("hash")).hash,
       oldUsername: e.target.oldUsername.value,
       newUsername: e.target.newUsername.value,
     };
 
     changeUsername(data, (res) => {
-      setMsg(res);
+      setMsg(res.msg);
       setPopUp(true);
       e.target.reset();
     });
@@ -50,12 +52,11 @@ const ChangeUsernamePage = () => {
   if (info === true) {
     return (
       <DashLayout>
-        <div
-          className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer"
-          onClick={() => window.history.back()}
-        >
-          <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
-        </div>
+        <Link to={`/setting-account`}>
+          <div className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer">
+            <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
+          </div>
+        </Link>
         <div className="w-full p-3 flex justify-center items-center">
           <form
             action="post"

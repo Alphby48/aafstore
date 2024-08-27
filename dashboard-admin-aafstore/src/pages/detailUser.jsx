@@ -7,6 +7,7 @@ import { DarkMode } from "../context/darkContext";
 import LoadingPage from "../components/element/loading";
 import NotFoundPage from "./404";
 import { GetAdmin } from "../service/admin";
+import { Link } from "react-router-dom";
 
 const DetailUserPage = () => {
   const { id } = useParams();
@@ -16,15 +17,16 @@ const DetailUserPage = () => {
   const [mount, setMount] = useState(false);
   const { isDarkMode } = useContext(DarkMode);
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataSet = res.find((item) => item.hash === local.hash);
+        if (dataSet) {
           setIsOk(true);
         } else {
           window.location.href = "/login";
@@ -34,8 +36,8 @@ const DetailUserPage = () => {
   }, [id]);
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
-    GetUsers(local, (res) => {
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
+    GetUsers(local.hash, (res) => {
       const data = res.find((item) => item._id === id);
       if (data) {
         setUser(data);
@@ -51,12 +53,11 @@ const DetailUserPage = () => {
   if (info === true) {
     return (
       <DashLayout>
-        <div
-          className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer"
-          onClick={() => window.history.back()}
-        >
-          <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
-        </div>
+        <Link to={`/users-control`}>
+          <div className=" w-20 p-3 mb-4 text-3xl bg-sky-600 text-white rounded-lg cursor-pointer">
+            <i className="fa-solid fa-arrow-right-to-bracket -rotate-180"></i>
+          </div>
+        </Link>
         <div className="flex w-full flex-wrap justify-center items-center gap-7">
           <div>
             <img

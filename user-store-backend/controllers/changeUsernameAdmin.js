@@ -24,9 +24,12 @@ const changeUsernameAdmin = async (req, res) => {
           { $set: { username: hashUssNew } }
         );
 
-        res.send(`username telah di ubah ke ${newUsername}`);
+        const sendLog = { msg: `username telah di ubah ke ${newUsername}` };
+
+        res.send(sendLog);
       } else {
-        res.send("username lama salah");
+        const senderr = { msg: "username lama salah" };
+        res.send(senderr);
       }
     }
   } catch (error) {

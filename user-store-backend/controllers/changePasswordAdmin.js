@@ -28,10 +28,11 @@ const changePasswordAdmin = async (req, res) => {
             },
           }
         );
-
-        res.send(`password telah di ubah`);
+        const sendLog = { msg: "password telah di ubah" };
+        res.send(sendLog);
       } else {
-        res.send("password lama salah");
+        const senderr = { msg: "password lama salah" };
+        res.send(senderr);
       }
     }
   } catch (error) {

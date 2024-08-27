@@ -14,15 +14,16 @@ const AddProductPage = () => {
   const [changePp, setChangePp] = useState("https://fakeimg.pl/160x240/");
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (!local) {
       window.location.href = "/login";
       return;
     }
 
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataset = res.find((item) => item.hash === local.hash);
+        if (dataset) {
           console.log(true);
           setKondisi(true);
         } else {

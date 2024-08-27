@@ -2,9 +2,11 @@ const adminSchema = require("../model/admin");
 const getAdmin = async (req, res) => {
   try {
     const admin = await adminSchema.findOne({ hash: req.params.id });
-    res.send(admin.hash);
+    const sendLog = { hash: admin.hash, js: "js" };
+    res.send([sendLog]);
   } catch (error) {
-    res.send(`Tidak Ada Data`);
+    const sendGagal = { hash: "gagal", js: "js" };
+    res.send([sendGagal]);
   }
 };
 

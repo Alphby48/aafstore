@@ -11,12 +11,15 @@ const FormLogin = () => {
   const [info, setInfo] = useState("");
 
   useEffect(() => {
-    const local = localStorage.getItem("hash");
+    const local = JSON.parse(localStorage.getItem("hash")) || { hash: "001" };
     if (local) {
-      GetAdmin(local, (res) => {
-        if (res === local) {
+      GetAdmin(local.hash, (res) => {
+        const dataset = res.find((item) => item.hash === local.hash);
+
+        if (dataset) {
           window.location = "/";
         } else {
+          console.log(`gak ada`);
           localStorage.removeItem("hash");
         }
       });
@@ -30,7 +33,10 @@ const FormLogin = () => {
     };
     PostLogin(data, (status, res) => {
       if (status) {
-        localStorage.setItem("hash", res);
+        const setLocal = {
+          hash: res.hash,
+        };
+        localStorage.setItem("hash", JSON.stringify(setLocal));
         window.location = "/";
       } else {
         setInfo("username atau password salah");
