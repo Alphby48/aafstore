@@ -82,6 +82,8 @@ const CartPage = () => {
         return acc;
       }, 0);
       setTotal(sum);
+    } else {
+      setTotal(0);
     }
   }, [cart, cartProduct]);
 

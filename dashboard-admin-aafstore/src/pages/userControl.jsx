@@ -58,8 +58,8 @@ const UserControlPage = () => {
     setIdConfirm(data);
   };
 
-  const handleRemoveAccount = () => {
-    DeleteUser(idConfirm, (res) => {
+  const handleRemoveAccount = async () => {
+    const handel = await DeleteUser(idConfirm, (res) => {
       dispatch(mountAct(!mount));
       setConfirm(false);
     });
