@@ -1,4 +1,5 @@
 const express = require("express");
+const { secure } = require("./secure/secure.js");
 const { Uploaded } = require("./controllers/upoadImage.js");
 const { deleteAccount } = require("./controllers/deleteAccount.js");
 const { deleteProduct } = require("./controllers/deleteProduct.js");
@@ -62,8 +63,13 @@ app.use(
 app.use(flash());
 
 //
-app.get("/", async (req, res) => {
-  res.send("daripada liatin API orang. Mending liat JKT48");
+app.get("/", secure, (req, res) => {
+  res.send([
+    {
+      status: 200,
+      msg: "server running",
+    },
+  ]);
 });
 
 // register
@@ -72,11 +78,11 @@ app.post("/auth", register);
 
 // login
 
-app.post("/login", login);
+app.post("/login", secure, login);
 
 // products
 
-app.get("/products/:us", getProducts);
+app.get("/products/:us", secure, getProducts);
 
 // delete profile
 
@@ -128,15 +134,15 @@ app.put("/change-username-admin", changeUsernameAdmin);
 
 // get admin
 
-app.get("/admin/:id", getAdmin);
+app.get("/admin/:id", secure, getAdmin);
 
 // get products for admin
 
-app.get("/admin/products/:id", getProductsAdmin);
+app.get("/admin/products/:id", secure, getProductsAdmin);
 
 // get users for admin
 
-app.get("/admin/users/:id", getUsersAdmin);
+app.get("/admin/users/:id", secure, getUsersAdmin);
 
 // addProductAdmin
 

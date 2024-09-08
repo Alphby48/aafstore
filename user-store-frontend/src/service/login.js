@@ -5,7 +5,7 @@ export const AuthLogin = (data, call) => {
   axios
     .post(`${uri}/login`, data, {
       headers: {
-        "Content-Type": "application/json",
+        API_KEY: "forum13",
         "Access-Control-Allow-Origin": `${uri}`,
       },
     })
